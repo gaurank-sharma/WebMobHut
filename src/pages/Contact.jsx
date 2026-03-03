@@ -11,7 +11,7 @@
 //         <div className="text-center mb-16">
 //           <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-wide">
 //             Experience <br />
-//             <span className="text-[#6EE7B7]">Connection</span>
+//             <span className="text-[#2eaff0]">Connection</span>
 //           </h1>
 //           <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-sm md:text-base">
 //             Ready to Experience Everything? If you're searching for the right agency partner, 
@@ -56,11 +56,11 @@
 //                 </label>
 //                 <div className="grid grid-cols-2 gap-4">
 //                   <div>
-//                     <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+//                     <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
 //                     <span className="text-xs text-gray-400 mt-1 block">First</span>
 //                   </div>
 //                   <div>
-//                     <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+//                     <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
 //                     <span className="text-xs text-gray-400 mt-1 block">Last</span>
 //                   </div>
 //                 </div>
@@ -69,7 +69,7 @@
 //               {/* Company */}
 //               <div>
 //                 <label className="block text-sm font-semibold text-white mb-2">Company</label>
-//                 <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+//                 <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
 //               </div>
 
 //               {/* Email */}
@@ -77,7 +77,7 @@
 //                 <label className="block text-sm font-semibold text-white mb-2">
 //                   Email <span className="text-red-500 font-normal italic">(Required)</span>
 //                 </label>
-//                 <input type="email" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+//                 <input type="email" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
 //               </div>
 
 //               {/* Message */}
@@ -85,12 +85,12 @@
 //                 <label className="block text-sm font-semibold text-white mb-2">
 //                   Message <span className="text-red-500 font-normal italic">(Required)</span>
 //                 </label>
-//                 <textarea rows="5" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7] resize-none"></textarea>
+//                 <textarea rows="5" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0] resize-none"></textarea>
 //               </div>
 
 //               {/* Submit Button */}
 //               <div className="pt-2">
-//                 <button type="button" className="px-8 py-3 bg-[#6EE7B7] text-black font-bold rounded-full hover:bg-[#58d5a3] transition-colors duration-300">
+//                 <button type="button" className="px-8 py-3 bg-[#2eaff0] text-black font-bold rounded-full hover:bg-[#58d5a3] transition-colors duration-300">
 //                   SUBMIT
 //                 </button>
 //               </div>
@@ -125,7 +125,7 @@ const ContactUs = () => {
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl font-bold uppercase tracking-wide">
               Experience <br />
-              <span className="text-[#6EE7B7]">Connection</span>
+              <span className="text-[#2eaff0]">Connection</span>
             </h1>
             <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-sm md:text-base">
               Ready to Experience Everything? If you're searching for the right agency partner, 
@@ -170,11 +170,11 @@ const ContactUs = () => {
                   </label>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+                      <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
                       <span className="text-xs text-gray-400 mt-1 block">First</span>
                     </div>
                     <div>
-                      <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+                      <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
                       <span className="text-xs text-gray-400 mt-1 block">Last</span>
                     </div>
                   </div>
@@ -183,7 +183,7 @@ const ContactUs = () => {
                 {/* Company */}
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Company</label>
-                  <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+                  <input type="text" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
                 </div>
 
                 {/* Email */}
@@ -191,7 +191,7 @@ const ContactUs = () => {
                   <label className="block text-sm font-semibold text-white mb-2">
                     Email <span className="text-red-500 font-normal italic">(Required)</span>
                   </label>
-                  <input type="email" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7]" />
+                  <input type="email" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0]" />
                 </div>
 
                 {/* Message */}
@@ -199,12 +199,12 @@ const ContactUs = () => {
                   <label className="block text-sm font-semibold text-white mb-2">
                     Message <span className="text-red-500 font-normal italic">(Required)</span>
                   </label>
-                  <textarea rows="5" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#6EE7B7] resize-none"></textarea>
+                  <textarea rows="5" className="w-full px-4 py-2 bg-white text-black rounded outline-none focus:ring-2 focus:ring-[#2eaff0] resize-none"></textarea>
                 </div>
 
                 {/* Submit Button */}
                 <div className="pt-2">
-                  <button type="button" className="px-8 py-3 bg-[#6EE7B7] text-black font-bold rounded-full hover:bg-[#58d5a3] transition-colors duration-300">
+                  <button type="button" className="px-8 py-3 bg-[#2eaff0] text-black font-bold rounded-full hover:bg-[#58d5a3] transition-colors duration-300">
                     SUBMIT
                   </button>
                 </div>
@@ -225,9 +225,9 @@ const ContactUs = () => {
           
           {/* Header for Map Section */}
           <div className="text-center mb-16">
-            <span className="text-sm uppercase tracking-widest text-[#6EE7B7] font-bold">WebMobHut</span>
+            <span className="text-sm uppercase tracking-widest text-[#2eaff0] font-bold">WebMobHut</span>
             <h2 className="text-4xl md:text-5xl font-heading font-bold mt-2 text-white">National Impact</h2>
-            <div className="h-1 w-24 bg-[#6EE7B7] mx-auto mt-6"></div>
+            <div className="h-1 w-24 bg-[#2eaff0] mx-auto mt-6"></div>
           </div>
 
           {/* Map Container */}
@@ -250,8 +250,8 @@ const ContactUs = () => {
               Longitude: ~77.2°E. Located in Northern India.
             */}
             <div className="absolute top-[39%] left-[41%] group pointer-events-auto">
-              <div className="w-10 h-10 bg-[#6EE7B7]/20 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform animate-pulse">
-                <div className="w-3 h-3 bg-[#6EE7B7] rounded-full shadow-[0_0_15px_#6EE7B7]"></div>
+              <div className="w-10 h-10 bg-[#2eaff0]/20 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform animate-pulse">
+                <div className="w-3 h-3 bg-[#2eaff0] rounded-full shadow-[0_0_15px_#2eaff0]"></div>
               </div>
               {/* Hover Tooltip */}
               <div className="absolute top-0 left-8 bg-neutral-900 border border-neutral-700 p-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-30 pointer-events-none">
