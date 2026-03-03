@@ -249,7 +249,7 @@ const ContactUs = () => {
             {/* DELHI NCR CLUSTER
               Longitude: ~77.2°E. Located in Northern India.
             */}
-            <div className="absolute top-[42%] left-[68%] group pointer-events-auto">
+            <div className="absolute top-[42%] left-[40%] group pointer-events-auto">
               <div className="w-10 h-10 bg-[#6EE7B7]/20 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform animate-pulse">
                 <div className="w-3 h-3 bg-[#6EE7B7] rounded-full shadow-[0_0_15px_#6EE7B7]"></div>
               </div>
