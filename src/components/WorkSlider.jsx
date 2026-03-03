@@ -167,7 +167,6 @@
 // export default WorkSlider;
 
 
-
 import React, { useRef, useEffect } from 'react';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -250,16 +249,19 @@ const WorkSlider = () => {
                 <img 
                   src={item.src || item.image} 
                   alt="Portfolio Work" 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
+                  // REMOVED grayscale. Image will always be in full color.
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                 />
                 <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/10 transition-colors duration-500 z-10 mix-blend-overlay"></div>
               </div>
               
-              <div className="absolute top-1/2 -left-12 -translate-y-1/2 flex items-center gap-4 mix-blend-difference text-white z-20 pointer-events-none">
-                <span className="text-xl font-bold tracking-widest">
+              {/* Minimalist Overlay Text */}
+              <div className="absolute top-1/2 -left-12 -translate-y-1/2 flex items-center gap-4 z-20 pointer-events-none">
+                {/* Number colored in your theme blue */}
+                <span className="text-3xl font-black tracking-widest text-[#2eaff0] drop-shadow-md">
                   0{index + 1}/
                 </span>
-                <span className="text-xl font-bold tracking-widest uppercase text-transparent" style={{ WebkitTextStroke: '1px white' }}>
+                <span className="text-xl font-bold tracking-widest uppercase text-transparent drop-shadow-md" style={{ WebkitTextStroke: '1px white' }}>
                   {item.category || "Projects"}
                 </span>
               </div>
@@ -294,7 +296,8 @@ const WorkSlider = () => {
               <img 
                 src={item.src || item.image} 
                 alt="Portfolio Work" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
+                // REMOVED grayscale. Image will always be in full color.
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                 loading="lazy" 
               />
               
@@ -306,17 +309,19 @@ const WorkSlider = () => {
 
               {/* Bottom Left Text */}
               <div className="absolute bottom-8 left-8 text-white z-20">
-                <h3 className="text-2xl font-bold tracking-wide group-hover:text-[#2eaff0] transition-colors">
-                  {item.title || `Execution 0${index + 1}`}
+                <h3 className="text-2xl font-bold tracking-wide group-hover:text-white transition-colors">
+                  {/* Number colored in your theme blue */}
+                  <span className="text-[#2eaff0] mr-2 text-xl">0{index + 1}.</span> 
+                  {item.title || `Execution`}
                 </h3>
-                <p className="text-xs font-bold tracking-widest uppercase text-neutral-400 mt-2">
+                <p className="text-xs font-bold tracking-widest uppercase text-neutral-400 mt-3">
                   {item.category || "Event Production"}
                 </p>
               </div>
 
               {/* Bottom Right Thin Arrow */}
-              <div className="absolute bottom-8 right-8 text-[#2eaff0] z-20 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="square" strokeLinejoin="miter">
+              <div className="absolute bottom-8 right-8 text-[#2eaff0] z-20 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
