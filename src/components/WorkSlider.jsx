@@ -1,8 +1,9 @@
+
 // import React from 'react';
 // import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Autoplay, Pagination } from 'swiper/modules';
 // import { Link } from 'react-router-dom';
-// import { ArrowRight } from 'lucide-react';
+// import { ArrowRight, PlayCircle } from 'lucide-react';
 // import { portfolioData } from '../data';
 
 // // Import Swiper styles
@@ -25,7 +26,10 @@
 //         </Link>
 //       </div>
 
-//       <div className="pl-6 md:pl-0 container mx-auto">
+//       {/* FIX: Added 'container mx-auto px-6' to align first image with text. 
+//          The Swiper has '!overflow-visible' to let images bleed to the right edge. 
+//       */}
+//       <div className="container mx-auto px-6">
 //         <Swiper
 //           modules={[Autoplay, Pagination]}
 //           spaceBetween={20}
@@ -38,29 +42,50 @@
 //           }}
 //           pagination={{ clickable: true, dynamicBullets: true }}
 //           breakpoints={{
-//             640: { slidesPerView: 2.5 },
-//             1024: { slidesPerView: 3.5 },
+//             640: { slidesPerView: 2.2 },
+//             1024: { slidesPerView: 3.2 },
+//             1280: { slidesPerView: 3.5 },
 //           }}
-//           className="pb-12 !overflow-visible"
+//           className="pb-16 !overflow-visible" 
 //         >
 //           {sliderImages.map((item) => (
 //             <SwiperSlide key={item.id} className="h-full">
-//               <div className="group relative rounded-xl overflow-hidden h-[300px] md:h-[400px] shadow-lg cursor-grab active:cursor-grabbing">
+//               <div className="group relative rounded-2xl overflow-hidden h-[350px] md:h-[450px] shadow-lg cursor-grab active:cursor-grabbing">
 //                 <img 
 //                   src={item.src} 
 //                   alt="Portfolio Work" 
 //                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+//                   loading="lazy"
 //                 />
-//                 {/* Subtle dark gradient at bottom */}
-//                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                
+//                 {/* Gradient Overlay for Text Visibility */}
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+
+//                 {/* Video Icon if needed */}
+//                 {item.type === 'video' && (
+//                   <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full text-white border border-white/30">
+//                     <PlayCircle size={20} />
+//                   </div>
+//                 )}
+
+//                 {/* Card Content */}
+//                 <div className="absolute bottom-0 left-0 p-6 w-full">
+//                   <span className="inline-block px-3 py-1 bg-blue-600 text-white text-[10px] font-bold tracking-wider uppercase rounded-full mb-3">
+//                     {item.category}
+//                   </span>
+//                   <p className="text-white font-medium text-lg md:text-xl line-clamp-1">
+//                     Event Execution {item.id}
+//                   </p>
+//                 </div>
 //               </div>
 //             </SwiperSlide>
 //           ))}
 //         </Swiper>
 //       </div>
       
+//       {/* Mobile View All Button */}
 //       <div className="container mx-auto px-6 mt-8 md:hidden">
-//          <Link to="/gallery" className="block w-full py-3 border border-gray-300 text-center rounded-lg font-bold text-gray-700">
+//          <Link to="/gallery" className="block w-full py-4 border border-gray-200 text-center rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-colors">
 //             View All Projects
 //          </Link>
 //       </div>
@@ -71,7 +96,10 @@
 // export default WorkSlider;
 
 
-import React from 'react';
+
+import React, { useRef, useEffect } from 'react';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
@@ -82,85 +110,166 @@ import { portfolioData } from '../data';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const WorkSlider = () => {
   // Take first 10 images for the slider
   const sliderImages = portfolioData.slice(0, 10);
+  
+  // Refs for GSAP Desktop Animation
+  const sectionRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+
+  useEffect(() => {
+    // GSAP MatchMedia ensures the scroll pin ONLY happens on laptops/desktops
+    let ctx = gsap.matchMedia();
+
+    ctx.add("(min-width: 1024px)", () => {
+      const section = sectionRef.current;
+      const scrollContainer = scrollContainerRef.current;
+      
+      // Calculate total scroll distance based on content width
+      const scrollWidth = scrollContainer.scrollWidth - window.innerWidth;
+
+      gsap.to(scrollContainer, {
+        x: -scrollWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${scrollWidth + 1000}`, // Adding 1000 smooths the scroll speed
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+    });
+
+    return () => ctx.revert(); // Clean up on unmount/resize
+  }, []);
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-6 mb-12 flex justify-between items-end">
-        <div>
+    <section ref={sectionRef} className="bg-[#ebebeb] overflow-hidden relative">
+      
+      {/* =========================================
+          DESKTOP VIEW (GSAP Horizontal Scroll)
+      ========================================= */}
+      <div 
+        ref={scrollContainerRef} 
+        className="hidden lg:flex h-screen items-center w-max"
+      >
+        {/* Intro Block (Sticky on the left before scrolling) */}
+        <div className="w-[40vw] shrink-0 pl-20 z-10">
           <span className="text-blue-600 font-bold tracking-wider text-sm uppercase">Our Portfolio</span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mt-2">Recent Executions</h2>
+          <h2 className="text-5xl lg:text-7xl font-serif font-bold text-gray-900 mt-2 leading-tight">
+            Recent <br /> Executions
+          </h2>
+          <Link to="/gallery" className="mt-8 inline-flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors text-lg">
+            View Full Gallery <ArrowRight size={24} className="ml-2" />
+          </Link>
         </div>
-        <Link to="/gallery" className="hidden md:flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors">
-          View Full Gallery <ArrowRight size={20} className="ml-2" />
-        </Link>
-      </div>
 
-      {/* FIX: Added 'container mx-auto px-6' to align first image with text. 
-         The Swiper has '!overflow-visible' to let images bleed to the right edge. 
-      */}
-      <div className="container mx-auto px-6">
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={20}
-          slidesPerView={1.2}
-          centeredSlides={false}
-          loop={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          breakpoints={{
-            640: { slidesPerView: 2.2 },
-            1024: { slidesPerView: 3.2 },
-            1280: { slidesPerView: 3.5 },
-          }}
-          className="pb-16 !overflow-visible" 
-        >
-          {sliderImages.map((item) => (
-            <SwiperSlide key={item.id} className="h-full">
-              <div className="group relative rounded-2xl overflow-hidden h-[350px] md:h-[450px] shadow-lg cursor-grab active:cursor-grabbing">
+        {/* Staggered Editorial Cards */}
+        <div className="flex gap-20 pr-[20vw]">
+          {sliderImages.map((item, index) => (
+            <div 
+              key={item.id} 
+              // Alternating margins create the staggered up/down look from your screenshot
+              className={`relative w-[40vw] xl:w-[35vw] h-[70vh] flex-shrink-0 group ${
+                index % 2 === 0 ? "-mt-16" : "mt-32"
+              }`}
+            >
+              {/* Image Container */}
+              <div className="w-full h-full overflow-hidden shadow-2xl">
                 <img 
                   src={item.src} 
                   alt="Portfolio Work" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
                 />
-                
-                {/* Gradient Overlay for Text Visibility */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
-
-                {/* Video Icon if needed */}
-                {item.type === 'video' && (
-                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full text-white border border-white/30">
-                    <PlayCircle size={20} />
-                  </div>
-                )}
-
-                {/* Card Content */}
-                <div className="absolute bottom-0 left-0 p-6 w-full">
-                  <span className="inline-block px-3 py-1 bg-blue-600 text-white text-[10px] font-bold tracking-wider uppercase rounded-full mb-3">
-                    {item.category}
-                  </span>
-                  <p className="text-white font-medium text-lg md:text-xl line-clamp-1">
-                    Event Execution {item.id}
-                  </p>
-                </div>
               </div>
-            </SwiperSlide>
+              
+              {/* Minimalist Overlay Text (e.g., "02/ Projects") */}
+              <div className="absolute top-1/2 -left-12 -translate-y-1/2 flex items-center gap-4 mix-blend-difference text-white z-20 pointer-events-none">
+                <span className="text-xl font-medium tracking-wide">
+                  0{index + 1}/
+                </span>
+                <span className="text-xl font-medium tracking-wide">
+                  {item.category || "Projects"}
+                </span>
+              </div>
+              
+              {/* Video Icon if applicable */}
+              {item.type === 'video' && (
+                <div className="absolute top-6 right-6 bg-white/20 backdrop-blur-md p-3 rounded-full text-white border border-white/30 z-20 shadow-lg cursor-pointer">
+                  <PlayCircle size={24} />
+                </div>
+              )}
+            </div>
           ))}
-        </Swiper>
+        </div>
       </div>
-      
-      {/* Mobile View All Button */}
-      <div className="container mx-auto px-6 mt-8 md:hidden">
-         <Link to="/gallery" className="block w-full py-4 border border-gray-200 text-center rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-colors">
+
+      {/* =========================================
+          MOBILE / TABLET VIEW (Swiper Slider)
+      ========================================= */}
+      <div className="block lg:hidden py-24 bg-white">
+        <div className="container mx-auto px-6 mb-12 flex justify-between items-end">
+          <div>
+            <span className="text-blue-600 font-bold tracking-wider text-sm uppercase">Our Portfolio</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mt-2">Recent Executions</h2>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-6">
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={20}
+            slidesPerView={1.2}
+            loop={true}
+            autoplay={{ delay: 2500, disableOnInteraction: false }}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            breakpoints={{ 640: { slidesPerView: 2.2 } }}
+            className="pb-16 !overflow-visible" 
+          >
+            {sliderImages.map((item) => (
+              <SwiperSlide key={item.id} className="h-full">
+                <div className="group relative rounded-2xl overflow-hidden h-[350px] md:h-[450px] shadow-lg">
+                  <img 
+                    src={item.src} 
+                    alt="Portfolio Work" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                    loading="lazy" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+                  
+                  {item.type === 'video' && (
+                    <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md p-2 rounded-full text-white border border-white/30">
+                      <PlayCircle size={20} />
+                    </div>
+                  )}
+
+                  <div className="absolute bottom-0 left-0 p-6 w-full">
+                    <span className="inline-block px-3 py-1 bg-blue-600 text-white text-[10px] font-bold tracking-wider uppercase rounded-full mb-3">
+                      {item.category || "Event"}
+                    </span>
+                    <p className="text-white font-medium text-lg md:text-xl line-clamp-1">
+                      Event Execution {item.id}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        
+        {/* Mobile View All Button */}
+        <div className="container mx-auto px-6 mt-8">
+          <Link to="/gallery" className="block w-full py-4 border border-gray-200 text-center rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition-colors">
             View All Projects
-         </Link>
+          </Link>
+        </div>
       </div>
+
     </section>
   );
 };
