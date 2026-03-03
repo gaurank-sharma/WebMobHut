@@ -133,7 +133,7 @@ const ServiceDetail = () => {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center flex-col">
         <h2 className="text-4xl font-bold mb-4">Service Not Found</h2>
-        <Link to="/services" className="text-[#6EE7B7] hover:underline">Return to Services</Link>
+        <Link to="/services" className="text-[#2eaff0] hover:underline">Return to Services</Link>
       </div>
     );
   }
@@ -157,11 +157,11 @@ const ServiceDetail = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 container mx-auto px-6 h-full flex flex-col justify-end pb-24">
-          <Link to="/services" className="hero-text text-gray-400 hover:text-[#6EE7B7] flex items-center mb-8 uppercase tracking-widest text-sm font-bold w-max transition-colors">
+          <Link to="/services" className="hero-text text-gray-400 hover:text-[#2eaff0] flex items-center mb-8 uppercase tracking-widest text-sm font-bold w-max transition-colors">
             <ArrowLeft size={18} className="mr-3"/> Back to Services
           </Link>
           
-          <div className="hero-text inline-block bg-[#6EE7B7] text-black font-black uppercase tracking-tight text-xl md:text-3xl px-4 py-2 w-max mb-4">
+          <div className="hero-text inline-block bg-[#2eaff0] text-black font-black uppercase tracking-tight text-xl md:text-3xl px-4 py-2 w-max mb-4">
              {service.title.split(' ')[0]} {/* First word highlight */}
           </div>
           <h1 className="hero-text text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.1] max-w-4xl">
@@ -177,7 +177,7 @@ const ServiceDetail = () => {
         <div ref={contentRef} className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* Left: Glowing Border Image */}
-          <div className="relative p-2 rounded-2xl border border-[#6EE7B7] shadow-[0_0_30px_rgba(110,231,183,0.15)] group">
+          <div className="relative p-2 rounded-2xl border border-[#2eaff0] shadow-[0_0_30px_rgba(110,231,183,0.15)] group">
             <div className="overflow-hidden rounded-xl aspect-square md:aspect-[4/3]">
               <img 
                 src={service.image} 
@@ -192,7 +192,7 @@ const ServiceDetail = () => {
             
             {/* Overview / Discover Section */}
             <div>
-              <div className="inline-block bg-[#6EE7B7] text-black font-black uppercase tracking-tight text-3xl md:text-4xl px-4 py-1 mb-6">
+              <div className="inline-block bg-[#2eaff0] text-black font-black uppercase tracking-tight text-3xl md:text-4xl px-4 py-1 mb-6">
                 DISCOVER
               </div>
               <p className="text-2xl md:text-3xl text-white leading-snug mb-6 font-medium">
@@ -205,7 +205,7 @@ const ServiceDetail = () => {
 
             {/* Features / Define Section */}
             <div ref={featuresRef} className="border-t border-neutral-800 pt-12">
-              <div className="inline-block bg-[#6EE7B7] text-black font-black uppercase tracking-tight text-3xl md:text-4xl px-4 py-1 mb-8">
+              <div className="inline-block bg-[#2eaff0] text-black font-black uppercase tracking-tight text-3xl md:text-4xl px-4 py-1 mb-8">
                 DEFINE
               </div>
               <p className="text-neutral-400 mb-8 text-lg font-light">
@@ -215,7 +215,7 @@ const ServiceDetail = () => {
               <ul className="grid sm:grid-cols-2 gap-y-4 gap-x-8">
                 {service.features.map((feature, index) => (
                   <li key={index} className="feature-item flex items-center gap-4 text-neutral-200">
-                    <div className="w-1.5 h-1.5 bg-[#6EE7B7] rounded-full shrink-0 shadow-[0_0_8px_#6EE7B7]"></div>
+                    <div className="w-1.5 h-1.5 bg-[#2eaff0] rounded-full shrink-0 shadow-[0_0_8px_#2eaff0]"></div>
                     <span className="text-base font-medium tracking-wide">{feature}</span>
                   </li>
                 ))}
@@ -233,7 +233,7 @@ const ServiceDetail = () => {
         <div className="bg-[#111] border border-neutral-800 rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
           
           {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#6EE7B7]/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#2eaff0]/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
 
           <div className="relative z-10 text-center md:text-left">
             <h3 className="text-3xl md:text-5xl font-medium text-white mb-2">Ready to initiate?</h3>
@@ -243,7 +243,7 @@ const ServiceDetail = () => {
           <div className="relative z-10 shrink-0">
             <Link 
               to="/contact" 
-              className="inline-flex items-center justify-center px-10 py-5 bg-[#6EE7B7] text-black font-bold tracking-widest uppercase text-sm rounded-full hover:bg-white transition-colors duration-300 group"
+              className="inline-flex items-center justify-center px-10 py-5 bg-[#2eaff0] text-black font-bold tracking-widest uppercase text-sm rounded-full hover:bg-white transition-colors duration-300 group"
             >
               Get a Quote
               <ArrowRight size={20} className="ml-3 group-hover:translate-x-1 transition-transform" />
