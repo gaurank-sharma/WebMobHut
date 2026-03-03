@@ -135,7 +135,7 @@
 //         ========================================= */}
 //         <section className="py-16 md:py-24 px-6 container mx-auto max-w-7xl text-center">
 //           <h2 className="text-4xl md:text-5xl font-bold mb-4">National presence</h2>
-//           <div className="h-1 w-20 bg-[#6EE7B7] mb-6 mx-auto"></div> 
+//           <div className="h-1 w-20 bg-[#2eaff0] mb-6 mx-auto"></div> 
 //           <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
 //             Executing flawless events across major hubs in India. Find us where the action is.
 //           </p>
@@ -151,23 +151,23 @@
 
 //             {/* Delhi NCR Cluster */}
 //             <div className="absolute top-[32%] left-[45%] flex flex-col items-center group cursor-pointer z-10">
-//                <div className="w-3 h-3 md:w-4 md:h-4 bg-[#6EE7B7] rounded-full shadow-[0_0_15px_#6EE7B7] animate-pulse"></div>
+//                <div className="w-3 h-3 md:w-4 md:h-4 bg-[#2eaff0] rounded-full shadow-[0_0_15px_#2eaff0] animate-pulse"></div>
 //                <span className="text-xs md:text-sm mt-2 font-bold text-white bg-black/80 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Delhi</span>
 //             </div>
 
 //             <div className="absolute top-[34%] left-[43%] flex flex-col items-center group cursor-pointer z-10">
-//                <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-[#6EE7B7] rounded-full shadow-[0_0_10px_#6EE7B7]"></div>
+//                <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-[#2eaff0] rounded-full shadow-[0_0_10px_#2eaff0]"></div>
 //                <span className="text-xs md:text-sm mt-2 font-bold text-white bg-black/80 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Gurgaon</span>
 //             </div>
 
 //             <div className="absolute top-[34%] left-[47%] flex flex-col items-center group cursor-pointer z-10">
-//                <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-[#6EE7B7] rounded-full shadow-[0_0_10px_#6EE7B7]"></div>
+//                <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-[#2eaff0] rounded-full shadow-[0_0_10px_#2eaff0]"></div>
 //                <span className="text-xs md:text-sm mt-2 font-bold text-white bg-black/80 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Noida</span>
 //             </div>
 
 //             {/* Bangalore */}
 //             <div className="absolute top-[75%] left-[42%] flex flex-col items-center group cursor-pointer z-10">
-//                <div className="w-3 h-3 md:w-4 md:h-4 bg-[#6EE7B7] rounded-full shadow-[0_0_15px_#6EE7B7] animate-pulse"></div>
+//                <div className="w-3 h-3 md:w-4 md:h-4 bg-[#2eaff0] rounded-full shadow-[0_0_15px_#2eaff0] animate-pulse"></div>
 //                <span className="text-xs md:text-sm mt-2 font-bold text-white bg-black/80 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Bangalore</span>
 //             </div>
 //           </div>
@@ -180,7 +180,7 @@
 //           <div className="text-center mb-16">
 //             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-wide">
 //               Experience <br />
-//               <span className="text-[#6EE7B7]">Connection</span>
+//               <span className="text-[#2eaff0]">Connection</span>
 //             </h1>
 //             <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-sm md:text-base">
 //               Ready to Experience Everything? If you're searching for the right agency partner, 
@@ -203,7 +203,7 @@
 
 //               <div className="bg-[#111] p-6 rounded-xl border border-gray-800">
 //                 <p className="font-bold text-2xl text-white mb-1">Bhawna</p>
-//                 <p className="font-semibold text-[#6EE7B7] mb-4">Director, WebMobHut Pvt Ltd</p>
+//                 <p className="font-semibold text-[#2eaff0] mb-4">Director, WebMobHut Pvt Ltd</p>
                 
 //                 <div className="space-y-3 mt-6">
 //                   <div className="flex items-center gap-3 text-gray-300">
@@ -212,11 +212,11 @@
 //                   </div>
 //                   <div className="flex items-center gap-3 text-gray-300">
 //                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-//                     <a href="mailto:bhavishya39@gmail.com" className="hover:text-[#6EE7B7] transition-colors">bhavishya39@gmail.com</a>
+//                     <a href="mailto:bhavishya39@gmail.com" className="hover:text-[#2eaff0] transition-colors">bhavishya39@gmail.com</a>
 //                   </div>
 //                   <div className="flex items-center gap-3 text-gray-300">
 //                     <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-//                     <a href="https://www.webmobhut.com" target="_blank" rel="noreferrer" className="hover:text-[#6EE7B7] transition-colors">www.webmobhut.com</a>
+//                     <a href="https://www.webmobhut.com" target="_blank" rel="noreferrer" className="hover:text-[#2eaff0] transition-colors">www.webmobhut.com</a>
 //                   </div>
 //                 </div>
 //               </div>
@@ -231,33 +231,33 @@
 //                   </label>
 //                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 //                     <div>
-//                       <input type="text" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#6EE7B7] transition-all" />
+//                       <input type="text" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#2eaff0] transition-all" />
 //                       <span className="text-xs text-gray-400 mt-1.5 block">First</span>
 //                     </div>
 //                     <div>
-//                       <input type="text" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#6EE7B7] transition-all" />
+//                       <input type="text" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#2eaff0] transition-all" />
 //                       <span className="text-xs text-gray-400 mt-1.5 block">Last</span>
 //                     </div>
 //                   </div>
 //                 </div>
 //                 <div>
 //                   <label className="block text-sm font-semibold text-gray-200 mb-2">Company</label>
-//                   <input type="text" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#6EE7B7] transition-all" />
+//                   <input type="text" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#2eaff0] transition-all" />
 //                 </div>
 //                 <div>
 //                   <label className="block text-sm font-semibold text-gray-200 mb-2">
 //                     Email <span className="text-red-500 font-normal italic">(Required)</span>
 //                   </label>
-//                   <input type="email" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#6EE7B7] transition-all" />
+//                   <input type="email" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#2eaff0] transition-all" />
 //                 </div>
 //                 <div>
 //                   <label className="block text-sm font-semibold text-gray-200 mb-2">
 //                     Message <span className="text-red-500 font-normal italic">(Required)</span>
 //                   </label>
-//                   <textarea rows="4" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#6EE7B7] resize-none transition-all"></textarea>
+//                   <textarea rows="4" className="w-full px-4 py-3 bg-white text-black rounded-lg outline-none focus:ring-2 focus:ring-[#2eaff0] resize-none transition-all"></textarea>
 //                 </div>
 //                 <div className="pt-4">
-//                   <button type="button" className="w-full md:w-auto px-10 py-3.5 bg-[#6EE7B7] text-black font-bold tracking-wide rounded-full hover:bg-[#58d5a3] transform hover:-translate-y-0.5 transition-all duration-300 shadow-[0_0_15px_rgba(110,231,183,0.3)] hover:shadow-[0_0_20px_rgba(110,231,183,0.5)]">
+//                   <button type="button" className="w-full md:w-auto px-10 py-3.5 bg-[#2eaff0] text-black font-bold tracking-wide rounded-full hover:bg-[#58d5a3] transform hover:-translate-y-0.5 transition-all duration-300 shadow-[0_0_15px_rgba(110,231,183,0.3)] hover:shadow-[0_0_20px_rgba(110,231,183,0.5)]">
 //                     SUBMIT
 //                   </button>
 //                 </div>
@@ -355,7 +355,7 @@ const About = () => {
         
         {/* Massive Tagline Statement */}
         <div className="mb-32">
-          <span className="text-[#6EE7B7] font-bold tracking-widest uppercase text-sm mb-6 block">Who We Are</span>
+          <span className="text-[#2eaff0] font-bold tracking-widest uppercase text-sm mb-6 block">Who We Are</span>
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.1] tracking-tight">
             Precision, creativity, and <br className="hidden md:block" />
             <span className="text-neutral-500 italic">operational excellence.</span>
@@ -386,7 +386,7 @@ const About = () => {
         {/* Leadership Callout */}
         <div className="flex justify-end">
           <div className="w-full md:w-2/3 lg:w-1/2 bg-neutral-950 p-10 md:p-16 rounded-3xl border border-neutral-900 shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 left-0 w-2 h-full bg-[#6EE7B7]"></div>
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#2eaff0]"></div>
             <span className="text-neutral-500 font-bold tracking-widest uppercase text-xs mb-4 block">Leadership</span>
             <h3 className="text-4xl md:text-5xl font-medium text-white mb-6">
               Led by Viraj Ratra
@@ -469,7 +469,7 @@ const About = () => {
             <p className="text-xl md:text-2xl text-neutral-300 max-w-lg mt-8 mb-12 leading-relaxed">
               Ideas that move people by generating powerful cultural conversation and inviting people to join in.
             </p>
-            <button className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-[#6EE7B7] transition-colors duration-300">
+            <button className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-[#2eaff0] transition-colors duration-300">
               View Work
             </button>
           </div>
