@@ -81,7 +81,7 @@ const Footer = () => {
             
             {/* Column 1: About Us */}
             <div>
-              <h4 className="text-[#6EE7B7] font-semibold tracking-wide mb-6">About Us</h4>
+              <h4 className="text-[#2eaff0] font-semibold tracking-wide mb-6">About Us</h4>
               <ul className="space-y-4 text-neutral-300 text-sm font-light">
                 <li><Link to="/about" className="hover:text-white transition-colors">About us</Link></li>
                 <li><Link to="/gallery" className="hover:text-white transition-colors">Work</Link></li>
@@ -93,7 +93,7 @@ const Footer = () => {
 
             {/* Column 2: Legal */}
             <div>
-              <h4 className="text-[#6EE7B7] font-semibold tracking-wide mb-6">Legal</h4>
+              <h4 className="text-[#2eaff0] font-semibold tracking-wide mb-6">Legal</h4>
               <ul className="space-y-4 text-neutral-300 text-sm font-light">
                 <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
                 <li><Link to="/csr" className="hover:text-white transition-colors">CSR Policy</Link></li>
@@ -103,7 +103,7 @@ const Footer = () => {
 
             {/* Column 3: Contact */}
             <div>
-              <h4 className="text-[#6EE7B7] font-semibold tracking-wide mb-6">Contact</h4>
+              <h4 className="text-[#2eaff0] font-semibold tracking-wide mb-6">Contact</h4>
               <ul className="space-y-4 text-neutral-300 text-sm font-light">
                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
                 <li><Link to="/careers" className="hover:text-white transition-colors">Careers</Link></li>
@@ -124,16 +124,16 @@ const Footer = () => {
 
           {/* Social Icons (Solid Mint Green Circles) */}
           <div className="flex items-center gap-4">
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#6EE7B7] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#2eaff0] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <Linkedin size={18} fill="currentColor" strokeWidth={0} />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#6EE7B7] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#2eaff0] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <Instagram size={20} strokeWidth={2} />
             </a>
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#6EE7B7] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#2eaff0] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <Facebook size={20} fill="currentColor" strokeWidth={0} />
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#6EE7B7] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
+            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#2eaff0] flex items-center justify-center text-black hover:bg-white hover:-translate-y-1 transition-all duration-300">
               <Youtube size={22} fill="currentColor" strokeWidth={0} />
             </a>
           </div>
