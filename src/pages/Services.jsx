@@ -98,7 +98,7 @@ const Services = () => {
         <div ref={headerRef} className="text-center mb-32">
           <h1 className="text-5xl md:text-7xl lg:text-[6rem] font-black uppercase tracking-tight leading-[0.9] mb-8">
             Experience <br />
-            <span className="text-[#6EE7B7]">Solutions</span>
+            <span className="text-[#2eaff0]">Solutions</span>
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light tracking-wide">
             PHYSICAL, VIRTUAL OR HYBRID <br className="hidden md:block"/>
@@ -123,7 +123,7 @@ const Services = () => {
                 {/* Image Side (With Glowing Neon Border from Mockup) */}
                 <div className="w-full lg:w-1/2">
                   {/* Outer container creating the glowing outline effect */}
-                  <div className="relative p-2 rounded-2xl border border-[#6EE7B7] shadow-[0_0_30px_rgba(110,231,183,0.15)] group">
+                  <div className="relative p-2 rounded-2xl border border-[#2eaff0] shadow-[0_0_30px_rgba(110,231,183,0.15)] group">
                     <div className="overflow-hidden rounded-xl h-[350px] md:h-[500px]">
                       <img 
                         src={service.image} 
@@ -140,7 +140,7 @@ const Services = () => {
                   
                   {/* Highlighted Title Block */}
                   <div>
-                    <div className="inline-block bg-[#6EE7B7] text-black font-black uppercase tracking-tight text-3xl md:text-5xl px-4 py-2 mb-6">
+                    <div className="inline-block bg-[#2eaff0] text-black font-black uppercase tracking-tight text-3xl md:text-5xl px-4 py-2 mb-6">
                       {service.title.split(' ')[0]} {/* Takes the first word to make it massive */}
                     </div>
                     {/* The rest of the title */}
@@ -160,7 +160,7 @@ const Services = () => {
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-neutral-300 mt-8 border-t border-neutral-800 pt-8">
                     {service.features?.map((feature, i) => (
                       <li key={i} className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 bg-[#6EE7B7] rounded-full shrink-0"></div>
+                        <div className="w-1.5 h-1.5 bg-[#2eaff0] rounded-full shrink-0"></div>
                         <span className="text-sm font-medium tracking-wide">{feature}</span>
                       </li>
                     ))}
@@ -170,10 +170,10 @@ const Services = () => {
                   <div className="pt-8">
                     <Link 
                       to={`/services/${service.id}`} 
-                      className="inline-flex items-center text-white font-bold tracking-widest uppercase text-sm hover:text-[#6EE7B7] transition-colors group"
+                      className="inline-flex items-center text-white font-bold tracking-widest uppercase text-sm hover:text-[#2eaff0] transition-colors group"
                     >
                       Explore Service
-                      <span className="ml-4 p-3 rounded-full border border-neutral-700 group-hover:border-[#6EE7B7] group-hover:bg-[#6EE7B7] group-hover:text-black transition-all duration-300">
+                      <span className="ml-4 p-3 rounded-full border border-neutral-700 group-hover:border-[#2eaff0] group-hover:bg-[#2eaff0] group-hover:text-black transition-all duration-300">
                         <ArrowRight size={20} />
                       </span>
                     </Link>
