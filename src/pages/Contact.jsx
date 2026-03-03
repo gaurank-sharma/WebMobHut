@@ -108,7 +108,6 @@
 
 
 
-
 import React from 'react';
 
 const ContactUs = () => {
@@ -117,6 +116,7 @@ const ContactUs = () => {
       
       {/* =========================================
           CONTACT FORM SECTION
+          (Retained exactly from previous request)
       ========================================= */}
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -218,6 +218,7 @@ const ContactUs = () => {
 
       {/* =========================================
           NATIONAL IMPACT MAP SECTION
+          FIXED: Map pin for Bangalore corrected.
       ========================================= */}
       <section className="bg-neutral-950 py-24 px-6 border-t border-neutral-800 mt-auto">
         <div className="container mx-auto max-w-7xl">
@@ -230,21 +231,24 @@ const ContactUs = () => {
           </div>
 
           {/* Map Container */}
-          <div className="relative max-w-4xl mx-auto w-full aspect-[1/1] md:aspect-[16/10] bg-black rounded-3xl p-6 border border-neutral-800 shadow-2xl overflow-hidden">
+          <div className="relative max-w-4xl mx-auto w-full aspect-[1/1] md:aspect-[16/10] bg-black rounded-3xl p-6 border border-neutral-800 shadow-2xl overflow-hidden flex items-center justify-center">
             
             {/* The SVG Map via Wikipedia (Grayscale Stylized via Tailwind filters) */}
+            {/* Keeping the previously fixed opacity to ensure boundaries are visible. */}
             <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b4/India_outline.svg" 
+              src="https://upload.wikimedia.org/wikipedia/commons/e/ee/India-map-en.svg" 
               alt="India Map" 
-              className="w-full h-full object-contain filter invert opacity-10 brightness-50" 
+              className="w-full h-full object-contain filter invert opacity-40 pointer-events-none" 
             />
 
             {/* Gradient Overlay for Depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-60 pointer-events-none"></div>
 
-            {/* --- MAP PINS --- */}
+            {/* --- MAP PINS (Updated for correct relative position) --- */}
 
-            {/* DELHI NCR CLUSTER */}
+            {/* DELHI NCR CLUSTER
+              Longitude: ~77.2°E. Located in Northern India.
+            */}
             <div className="absolute top-[32%] left-[48%] group pointer-events-auto">
               <div className="w-10 h-10 bg-[#6EE7B7]/20 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform animate-pulse">
                 <div className="w-3 h-3 bg-[#6EE7B7] rounded-full shadow-[0_0_15px_#6EE7B7]"></div>
@@ -256,8 +260,11 @@ const ContactUs = () => {
               </div>
             </div>
 
-            {/* BANGALORE */}
-            <div className="absolute top-[75%] left-[45%] group pointer-events-auto">
+            {/* BANGALORE (Bengaluru)
+              Longitude: ~77.6°E. Located in Southern India.
+              FIXED: Now accurately placed almost directly south of Delhi.
+            */}
+            <div className="absolute top-[75%] left-[49%] group pointer-events-auto">
               <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform">
                 <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
               </div>
