@@ -277,7 +277,6 @@
 
 
 
-
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -293,8 +292,7 @@ const About = () => {
     let ctx = gsap.matchMedia();
 
     ctx.add("(min-width: 320px)", () => {
-      // 1. TRANSFORMATIVE CREATIVITY - FASTER TEXT ANIMATION
-      // Decreased scrub to 0.1 for instant response, increased xPercent for faster movement
+      // 1. TRANSFORMATIVE CREATIVITY (Sliding Text)
       gsap.to(".text-top", {
         xPercent: 60, 
         ease: "none",
@@ -318,14 +316,16 @@ const About = () => {
       });
 
       // 2. SPINNING FAN ANIMATION
+      // Fixed: Added transformOrigin and targeted the ref directly with scrub: 1
       gsap.to(fanRef.current, {
         rotation: 360,
+        transformOrigin: "center center",
         ease: "none",
         scrollTrigger: {
           trigger: fanSectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: true, // Smooth 1:1 rotation with scroll
+          scrub: 1, 
         }
       });
     });
@@ -337,68 +337,68 @@ const About = () => {
     <div className="min-h-screen bg-black text-white font-sans overflow-hidden">
       
       {/* =========================================
-          1. HERO VIDEO SECTION (Curved Bottom)
+          1. HERO VIDEO SECTION
       ========================================= */}
       <section className="relative w-full h-[85vh] bg-neutral-900 rounded-b-[4rem] md:rounded-b-[8rem] overflow-hidden shadow-2xl z-10">
-        {/* Placeholder for Video */}
         <div className="absolute inset-0 flex items-center justify-center">
           <p className="text-neutral-500 font-medium tracking-widest uppercase">Hero Video Background Plays Here</p>
         </div>
-        
-        {/* Dark overlay to make text pop if you add any */}
-        <div className="absolute inset-0 bg-black/30"></div>
-
-        {/* Play Button Overlay (Optional, matching your mockup) */}
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-           <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center pl-1 cursor-pointer pointer-events-auto hover:scale-110 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="black"><path d="M5 3l14 9-14 9V3z"/></svg>
+           <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center pl-2 cursor-pointer pointer-events-auto hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="black"><path d="M5 3l14 9-14 9V3z"/></svg>
            </div>
         </div>
       </section>
 
       {/* =========================================
-          2. CLASSIC "WHO WE ARE" / EDITORIAL SECTION
+          2. EDITORIAL "WHO WE ARE" SECTION
+          Redesigned to break up the "continuous text" look
       ========================================= */}
-      <section className="py-24 md:py-32 px-6 container mx-auto max-w-7xl z-0">
+      <section className="py-32 px-6 container mx-auto max-w-7xl z-0">
         
-        {/* Row 1: Who We Are */}
-        <div className="flex flex-col md:flex-row border-t border-neutral-800 pt-12 mb-20">
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Who We Are</h3>
-          </div>
-          <div className="w-full md:w-2/3">
-            <p className="text-3xl md:text-5xl lg:text-6xl font-medium leading-tight text-white">
-              Precision, creativity, and operational excellence.
-            </p>
-          </div>
+        {/* Massive Tagline Statement */}
+        <div className="mb-32">
+          <span className="text-[#6EE7B7] font-bold tracking-widest uppercase text-sm mb-6 block">Who We Are</span>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.1] tracking-tight">
+            Precision, creativity, and <br className="hidden md:block" />
+            <span className="text-neutral-500 italic">operational excellence.</span>
+          </h2>
         </div>
 
-        {/* Row 2: 12 Years of Excellence */}
-        <div className="flex flex-col md:flex-row border-t border-neutral-800 pt-12 mb-20">
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight">12 Years of Excellence</h3>
+        {/* 12 Years Asymmetrical Grid */}
+        <div className="grid md:grid-cols-12 gap-12 items-start mb-32 border-t border-neutral-800 pt-20">
+          {/* Big Number Graphic */}
+          <div className="md:col-span-4 flex flex-col">
+            <h3 className="text-[12rem] leading-none font-black text-white -mt-10 tracking-tighter">
+              12
+            </h3>
+            <p className="text-2xl font-bold uppercase tracking-widest text-neutral-400 mt-2">
+              Years of <br /> Excellence
+            </p>
           </div>
-          <div className="w-full md:w-2/3 space-y-8">
-            <p className="text-2xl md:text-4xl font-normal leading-tight text-neutral-300">
+          
+          {/* Content */}
+          <div className="md:col-span-8 md:pl-12 lg:pl-24 space-y-8">
+            <p className="text-2xl md:text-3xl lg:text-4xl font-normal leading-snug text-neutral-200">
               WebMobHut Pvt Ltd is an event management company specializing in mall decorations, retail activations, and corporate events across shopping complexes, marketplaces, and commercial spaces.
             </p>
-            <p className="text-xl md:text-2xl font-normal leading-relaxed text-neutral-400">
+            <p className="text-lg md:text-xl font-normal leading-relaxed text-neutral-500 max-w-2xl">
               With a strong focus on brand visibility, consumer engagement, and flawless execution, we create experiences that enhance footfall, engagement, and recall for malls and corporate clients alike.
             </p>
           </div>
         </div>
 
-        {/* Row 3: Leadership */}
-        <div className="flex flex-col md:flex-row border-t border-neutral-800 pt-12">
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight">Leadership</h3>
-          </div>
-          <div className="w-full md:w-2/3">
-            <p className="text-3xl md:text-5xl font-medium leading-tight text-white mb-4">
+        {/* Leadership Callout */}
+        <div className="flex justify-end">
+          <div className="w-full md:w-2/3 lg:w-1/2 bg-neutral-950 p-10 md:p-16 rounded-3xl border border-neutral-900 shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#6EE7B7]"></div>
+            <span className="text-neutral-500 font-bold tracking-widest uppercase text-xs mb-4 block">Leadership</span>
+            <h3 className="text-4xl md:text-5xl font-medium text-white mb-6">
               Led by Viraj Ratra
-            </p>
-            <p className="text-xl md:text-2xl text-neutral-400">
-              A dedicated professional with over 12 years of hands-on experience in the event management industry.
+            </h3>
+            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed">
+              A dedicated professional with over 12 years of hands-on experience in the event management industry, driving execution without compromise.
             </p>
           </div>
         </div>
@@ -406,13 +406,12 @@ const About = () => {
       </section>
 
       {/* =========================================
-          3. TRANSFORMATIVE CREATIVITY (Faster GSAP)
+          3. TRANSFORMATIVE CREATIVITY 
       ========================================= */}
       <section 
         ref={textAnimSectionRef} 
-        className="relative h-[60vh] md:h-screen w-full flex flex-col justify-center items-center py-20 overflow-hidden"
+        className="relative h-[60vh] md:h-screen w-full flex flex-col justify-center items-center py-20 overflow-hidden bg-black"
       >
-        {/* Base Solid Text */}
         <div className="absolute inset-0 flex flex-col justify-center items-center z-0 pointer-events-none">
           <h2 className="text-top text-[18vw] md:text-[14vw] font-black text-white uppercase leading-none whitespace-nowrap -ml-[40%]">
             Transformative
@@ -422,8 +421,7 @@ const About = () => {
           </h2>
         </div>
 
-        {/* Center Circular Image */}
-        <div className="relative z-10 w-56 h-56 md:w-[400px] md:h-[400px] rounded-full overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+        <div className="relative z-10 w-56 h-56 md:w-[450px] md:h-[450px] rounded-full overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]">
           <img 
             src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" 
             alt="Creativity" 
@@ -431,7 +429,6 @@ const About = () => {
           />
         </div>
 
-        {/* Outlined Text (In front of Image) */}
         <div className="absolute inset-0 flex flex-col justify-center items-center z-20 pointer-events-none">
           <h2 
             className="text-top text-[18vw] md:text-[14vw] font-black uppercase leading-none whitespace-nowrap text-transparent -ml-[40%]" 
@@ -449,23 +446,19 @@ const About = () => {
       </section>
 
       {/* =========================================
-          4. IMPACTS PEOPLE (Fan Animation Section)
+          4. IMPACTS PEOPLE (Fixed Fan Animation)
       ========================================= */}
-      <section ref={fanSectionRef} className="py-24 md:py-40 px-6 container mx-auto max-w-7xl">
+      <section ref={fanSectionRef} className="py-32 md:py-48 px-6 container mx-auto max-w-7xl">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           
           {/* Left: Spinning Geometric Fan */}
           <div className="flex justify-center md:justify-start">
-            <div ref={fanRef} className="w-64 h-64 md:w-[500px] md:h-[500px]">
-              {/* Perfect SVG Recreation of the 4-blade geometric fan from your screenshot */}
+            {/* The fanRef is placed on the exact element we want to rotate */}
+            <div ref={fanRef} className="w-72 h-72 md:w-[500px] md:h-[500px]">
               <svg viewBox="0 0 100 100" className="w-full h-full fill-white drop-shadow-2xl">
-                {/* Top Right Blade */}
                 <path d="M 50 50 L 50 5 A 45 45 0 0 1 95 50 Z" />
-                {/* Bottom Right Blade */}
                 <path d="M 50 50 L 95 50 A 45 45 0 0 1 50 95 Z" />
-                {/* Bottom Left Blade */}
                 <path d="M 50 50 L 50 95 A 45 45 0 0 1 5 50 Z" />
-                {/* Top Left Blade */}
                 <path d="M 50 50 L 5 50 A 45 45 0 0 1 50 5 Z" />
               </svg>
             </div>
@@ -473,16 +466,16 @@ const About = () => {
 
           {/* Right: Typography Block */}
           <div className="space-y-6">
-            <span className="text-sm md:text-base font-bold uppercase tracking-widest text-neutral-400">
+            <span className="text-sm md:text-base font-bold uppercase tracking-widest text-neutral-500">
               Transformative Creativity
             </span>
-            <h2 className="text-6xl md:text-8xl font-black uppercase leading-[0.9] text-white tracking-tighter">
+            <h2 className="text-6xl md:text-8xl lg:text-[9rem] font-black uppercase leading-[0.85] text-white tracking-tighter">
               Impacts <br /> People
             </h2>
-            <p className="text-xl md:text-2xl text-neutral-300 max-w-lg mt-6 mb-10 leading-relaxed">
+            <p className="text-xl md:text-2xl text-neutral-300 max-w-lg mt-8 mb-12 leading-relaxed">
               Ideas that move people by generating powerful cultural conversation and inviting people to join in.
             </p>
-            <button className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-neutral-200 transition-colors">
+            <button className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-[#6EE7B7] transition-colors duration-300">
               View Work
             </button>
           </div>
