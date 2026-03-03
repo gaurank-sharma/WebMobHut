@@ -234,7 +234,7 @@ const ContactUs = () => {
             
             {/* The SVG Map via Wikipedia (Grayscale Stylized via Tailwind filters) */}
             <img 
-              src="https://commons.wikimedia.org/wiki/File:India_outline.svg" 
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b4/India_outline.svg" 
               alt="India Map" 
               className="w-full h-full object-contain filter invert opacity-10 brightness-50" 
             />
