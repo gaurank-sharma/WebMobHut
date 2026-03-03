@@ -236,7 +236,7 @@ const ContactUs = () => {
             {/* The SVG Map via Wikipedia (Grayscale Stylized via Tailwind filters) */}
             {/* Keeping the previously fixed opacity to ensure boundaries are visible. */}
             <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/e/ee/India-map-en.svg" 
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b4/India_outline.svg" 
               alt="India Map" 
               className="w-full h-full object-contain filter invert opacity-40 pointer-events-none" 
             />
