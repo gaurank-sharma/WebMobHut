@@ -275,8 +275,6 @@
 // export default About;
 
 
-
-
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -286,7 +284,7 @@ gsap.registerPlugin(ScrollTrigger);
 const About = () => {
   const textAnimSectionRef = useRef(null);
   const fanSectionRef = useRef(null);
-  const fanRef = useRef(null);
+  const fanRef = useRef(null); // We will attach this directly to the SVG now
 
   useEffect(() => {
     let ctx = gsap.matchMedia();
@@ -315,11 +313,10 @@ const About = () => {
         }
       });
 
-      // 2. SPINNING FAN ANIMATION
-      // Fixed: Added transformOrigin and targeted the ref directly with scrub: 1
+      // 2. SPINNING FAN ANIMATION (Perfectly Centered)
       gsap.to(fanRef.current, {
         rotation: 360,
-        transformOrigin: "center center",
+        transformOrigin: "50% 50%", // Forces exact dead-center rotation
         ease: "none",
         scrollTrigger: {
           trigger: fanSectionRef.current,
@@ -353,7 +350,6 @@ const About = () => {
 
       {/* =========================================
           2. EDITORIAL "WHO WE ARE" SECTION
-          Redesigned to break up the "continuous text" look
       ========================================= */}
       <section className="py-32 px-6 container mx-auto max-w-7xl z-0">
         
@@ -368,7 +364,6 @@ const About = () => {
 
         {/* 12 Years Asymmetrical Grid */}
         <div className="grid md:grid-cols-12 gap-12 items-start mb-32 border-t border-neutral-800 pt-20">
-          {/* Big Number Graphic */}
           <div className="md:col-span-4 flex flex-col">
             <h3 className="text-[12rem] leading-none font-black text-white -mt-10 tracking-tighter">
               12
@@ -378,7 +373,6 @@ const About = () => {
             </p>
           </div>
           
-          {/* Content */}
           <div className="md:col-span-8 md:pl-12 lg:pl-24 space-y-8">
             <p className="text-2xl md:text-3xl lg:text-4xl font-normal leading-snug text-neutral-200">
               WebMobHut Pvt Ltd is an event management company specializing in mall decorations, retail activations, and corporate events across shopping complexes, marketplaces, and commercial spaces.
@@ -453,9 +447,9 @@ const About = () => {
           
           {/* Left: Spinning Geometric Fan */}
           <div className="flex justify-center md:justify-start">
-            {/* The fanRef is placed on the exact element we want to rotate */}
-            <div ref={fanRef} className="w-72 h-72 md:w-[500px] md:h-[500px]">
-              <svg viewBox="0 0 100 100" className="w-full h-full fill-white drop-shadow-2xl">
+            <div className="w-72 h-72 md:w-[500px] md:h-[500px]">
+              {/* fanRef moved directly to the SVG for flawless 50% 50% axis rotation */}
+              <svg ref={fanRef} viewBox="0 0 100 100" className="w-full h-full fill-white drop-shadow-2xl">
                 <path d="M 50 50 L 50 5 A 45 45 0 0 1 95 50 Z" />
                 <path d="M 50 50 L 95 50 A 45 45 0 0 1 50 95 Z" />
                 <path d="M 50 50 L 50 95 A 45 45 0 0 1 5 50 Z" />
