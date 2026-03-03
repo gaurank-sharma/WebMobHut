@@ -249,7 +249,7 @@ const ContactUs = () => {
             {/* DELHI NCR CLUSTER
               Longitude: ~77.2°E. Located in Northern India.
             */}
-            <div className="absolute top-[42%] left-[40%] group pointer-events-auto">
+            <div className="absolute top-[39%] left-[41%] group pointer-events-auto">
               <div className="w-10 h-10 bg-[#6EE7B7]/20 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform animate-pulse">
                 <div className="w-3 h-3 bg-[#6EE7B7] rounded-full shadow-[0_0_15px_#6EE7B7]"></div>
               </div>
@@ -264,7 +264,7 @@ const ContactUs = () => {
               Longitude: ~77.6°E. Located in Southern India.
               FIXED: Now accurately placed almost directly south of Delhi.
             */}
-            <div className="absolute top-[75%] left-[49%] group pointer-events-auto">
+            <div className="absolute top-[75%] left-[45%] group pointer-events-auto">
               <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform">
                 <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
               </div>
