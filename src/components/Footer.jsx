@@ -65,7 +65,7 @@ const Footer = () => {
             {/* Replace src with your actual logo path */}
             <div className="flex items-center gap-3 mb-2">
               <img 
-                src="/wmh final1 (2) (1).png" 
+                src="/wmh-logo.png" 
                 alt="WebMobHut Logo" 
                 className="h-16 md:h-20 w-auto object-contain bg-white/5 p-2 rounded-xl" // Added a subtle background/padding in case your logo has dark text
               />
