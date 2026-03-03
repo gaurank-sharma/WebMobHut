@@ -66,7 +66,7 @@
 // export default Gallery;
 
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { portfolioData } from '../data';
 import { X, ZoomIn } from 'lucide-react';
 import gsap from 'gsap';
@@ -78,58 +78,110 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const galleryRef = useRef(null);
 
-  useEffect(() => {
-    let ctx = gsap.matchMedia();
-
-    // ==========================================
-    // DESKTOP ANIMATIONS (>= 768px)
-    // ==========================================
-    ctx.add("(min-width: 768px)", () => {
-      // Right Curtain Reveal
+  useLayoutEffect(() => {
+    // gsap.context() is the React best-practice. It ensures all animations 
+    // run smoothly and cleans them up perfectly to avoid double-firing bugs.
+    let ctx = gsap.context(() => {
+      
+      // ==========================================
+      // DESKTOP: Right Curtain Reveal (Row 1)
+      // ==========================================
       gsap.utils.toArray('.desktop-anim-right').forEach(el => {
+        const imgContent = el.querySelector('.img-content');
+        
+        // 1. The Curtain (Outer Container)
         gsap.fromTo(el, 
-          { clipPath: 'inset(0 100% 0 0)', x: -50 }, // Starts clipped to the left, slightly shifted
+          { clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' }, // Clipped entirely to the left
           { 
-            clipPath: 'inset(0 0% 0 0)', x: 0, 
-            ease: 'power3.out',
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', // Fully revealed
+            ease: 'power2.inOut',
             scrollTrigger: {
               trigger: el,
               start: 'top 85%',
               end: 'top 40%',
-              scrub: 1.5, // Ties the animation smoothly to the scroll wheel
+              scrub: 1.2,
+            }
+          }
+        );
+
+        // 2. The Slide In (Inner Image moves right and settles into place)
+        gsap.fromTo(imgContent,
+          { xPercent: -20, scale: 1.15 },
+          {
+            xPercent: 0, scale: 1,
+            ease: 'power2.inOut',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              end: 'top 40%',
+              scrub: 1.2,
             }
           }
         );
       });
 
-      // Left Curtain Reveal
+      // ==========================================
+      // DESKTOP: Left Curtain Reveal (Row 3)
+      // ==========================================
       gsap.utils.toArray('.desktop-anim-left').forEach(el => {
+        const imgContent = el.querySelector('.img-content');
+
+        // 1. The Curtain
         gsap.fromTo(el, 
-          { clipPath: 'inset(0 0 0 100%)', x: 50 }, // Starts clipped to the right
+          { clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)' }, // Clipped entirely to the right
           { 
-            clipPath: 'inset(0 0 0 0)', x: 0, 
-            ease: 'power3.out',
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            ease: 'power2.inOut',
             scrollTrigger: {
               trigger: el,
               start: 'top 85%',
               end: 'top 40%',
-              scrub: 1.5,
+              scrub: 1.2,
+            }
+          }
+        );
+
+        // 2. The Slide In (Inner Image moves left and settles into place)
+        gsap.fromTo(imgContent,
+          { xPercent: 20, scale: 1.15 },
+          {
+            xPercent: 0, scale: 1,
+            ease: 'power2.inOut',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              end: 'top 40%',
+              scrub: 1.2,
             }
           }
         );
       });
-    });
 
-    // ==========================================
-    // MOBILE ANIMATIONS (< 768px)
-    // ==========================================
-    ctx.add("(max-width: 767px)", () => {
+      // ==========================================
+      // MOBILE: Vertical Curtain Reveal
+      // ==========================================
       gsap.utils.toArray('.mobile-anim').forEach(el => {
+        const imgContent = el.querySelector('.img-content');
+        
         gsap.fromTo(el, 
-          { clipPath: 'inset(100% 0 0 0)', scale: 1.1 }, // Slides up from bottom like a vertical curtain
+          { clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' }, // Clipped to bottom
           { 
-            clipPath: 'inset(0% 0 0 0)', scale: 1, 
-            ease: 'power2.out',
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            ease: 'power2.inOut',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 90%',
+              end: 'top 50%',
+              scrub: 1,
+            }
+          }
+        );
+
+        gsap.fromTo(imgContent,
+          { yPercent: 20, scale: 1.1 },
+          {
+            yPercent: 0, scale: 1,
+            ease: 'power2.inOut',
             scrollTrigger: {
               trigger: el,
               start: 'top 90%',
@@ -139,19 +191,18 @@ const Gallery = () => {
           }
         );
       });
-    });
+
+    }, galleryRef);
 
     return () => ctx.revert(); // Cleanup on unmount
   }, []);
 
   // Complex Grid Layout Generator based on your requirements
   const getGridClasses = (index) => {
-    // We use a cycle of 10 for Desktop to create the alternating 2 -> 3 -> 2 -> 3 pattern
-    const dCycle = index % 10;
-    // We use a cycle of 3 for Mobile to create the 1 -> 2 pattern
-    const mCycle = index % 3;
+    const dCycle = index % 10; // 10-image cycle for Desktop
+    const mCycle = index % 3;  // 3-image cycle for Mobile
 
-    let classes = "group relative overflow-hidden bg-[#0a0a0a] border border-neutral-900 aspect-[4/5] md:aspect-square cursor-pointer ";
+    let classes = "group relative overflow-hidden bg-black aspect-[4/5] md:aspect-square cursor-pointer ";
 
     // --- Mobile Layout Logic ---
     if (mCycle === 0) classes += "col-span-12 mobile-anim ";     // 1 Image (Animated)
@@ -175,8 +226,8 @@ const Gallery = () => {
           HERO SECTION 
       ========================================= */}
       <div className="relative bg-[#050505] pt-32 pb-24 text-center border-b border-neutral-900 overflow-hidden">
-        {/* Placeholder for Video/Image Background later */}
-        <div className="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2eaff0]/20 via-black to-black"></div>
+        {/* Dynamic Light Background */}
+        <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2eaff0]/20 via-black to-black pointer-events-none"></div>
         
         <div className="container mx-auto px-6 relative z-10">
           <span className="text-[#2eaff0] font-bold tracking-widest uppercase text-sm mb-4 block">
@@ -202,21 +253,23 @@ const Gallery = () => {
               className={getGridClasses(index)}
               onClick={() => setSelectedImage(item.src)}
             >
-              {/* Image */}
-              <img 
-                src={item.src} 
-                alt={`Execution ${index + 1}`} 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                loading="lazy"
-              />
-              
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-all duration-500 flex flex-col items-center justify-center mix-blend-overlay z-10"></div>
-              
-              {/* Magnify Icon */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                <div className="bg-black/50 backdrop-blur-md p-4 rounded-full text-[#2eaff0] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-50 group-hover:scale-100 border border-[#2eaff0]/30 shadow-[0_0_20px_rgba(46,175,240,0.3)]">
-                  <ZoomIn size={24} />
+              {/* Inner wrapper handles the image slide animation */}
+              <div className="img-content w-full h-full relative">
+                <img 
+                  src={item.src} 
+                  alt={`Execution ${index + 1}`} 
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                  loading="lazy"
+                />
+                
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-all duration-500 mix-blend-overlay z-10"></div>
+                
+                {/* Magnify Icon */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                  <div className="bg-black/50 backdrop-blur-md p-4 rounded-full text-[#2eaff0] opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-50 group-hover:scale-100 border border-[#2eaff0]/30 shadow-[0_0_20px_rgba(46,175,240,0.3)]">
+                    <ZoomIn size={24} />
+                  </div>
                 </div>
               </div>
 
