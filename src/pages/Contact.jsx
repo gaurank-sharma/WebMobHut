@@ -264,7 +264,7 @@ const ContactUs = () => {
               Longitude: ~77.6°E. Located in Southern India.
               FIXED: Now accurately placed almost directly south of Delhi.
             */}
-            <div className="absolute top-[75%] left-[45%] group pointer-events-auto">
+            <div className="absolute top-[75%] left-[42%] group pointer-events-auto">
               <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 scale-100 group-hover:scale-125 transition-transform">
                 <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
               </div>
