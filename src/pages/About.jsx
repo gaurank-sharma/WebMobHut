@@ -185,20 +185,21 @@ const About = () => {
          */}
 
 
-        {/* Premium Image Frame */}
+      {/* Premium Image Frame */}
         <div className="bg-white p-2 md:p-4 aspect-square shadow-2xl">
           <div className="w-full h-full bg-neutral-200 overflow-hidden relative group">
+            
+            {/* Removed 'grayscale' and 'opacity-90' so it displays in full color instantly */}
             <img 
               src="/Viraj_ratra.jpeg" 
               alt="Viraj Ratra" 
-              {/* Removed 'grayscale' and 'opacity-90' so it displays in full color instantly */}
               className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
             />
+            
             {/* Subtle blue ambient overlay on hover */}
             <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 mix-blend-overlay transition-colors duration-500"></div>
           </div>
         </div>
-
         
         {/* Text Side */}
         <div className="space-y-4">
