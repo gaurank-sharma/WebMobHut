@@ -163,14 +163,14 @@ const Navbar = () => {
   // Track scroll position to change navbar background from transparent to solid dark
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -183,10 +183,10 @@ const Navbar = () => {
 
   return (
     <nav 
-      // Fixed at top left, full width. Padding stays consistent to prevent jumping.
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 ${
+      {/* BULLETPROOF FIXED POSITIONING */}
+      className={`fixed top-0 left-0 right-0 w-full z-[9999] transition-all duration-300 py-4 ${
         scrolled 
-          ? 'bg-black/90 backdrop-blur-md border-b border-neutral-900 shadow-2xl' 
+          ? 'bg-black/95 backdrop-blur-xl border-b border-neutral-800 shadow-2xl' 
           : 'bg-transparent border-b border-transparent'
       }`}
     >
@@ -275,7 +275,6 @@ const Navbar = () => {
             </Link>
           ))}
           
-          {/* Mobile Contact Button */}
           <Link
             to="/contact"
             onClick={() => setIsOpen(false)}
@@ -285,7 +284,7 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Decorative Bottom Glow in Mobile Menu */}
+        {/* Decorative Bottom Glow */}
         <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#2eaff0]/10 to-transparent pointer-events-none"></div>
       </div>
     </nav>
