@@ -250,23 +250,21 @@ const About = () => {
         }
       });
 
-      // 2. THE FAN ASSEMBLY ANIMATION (1/4 to Full)
-      // Initially hide petals 2, 3, and 4. Start with just petal 1.
-      gsap.set(".petal-2, .petal-3, .petal-4", { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" });
-
+      // 2. THE UNFOLDING FAN ANIMATION (1/4 to Full)
+      // Petals start stacked at 0 degrees. We rotate them out as we scroll down.
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: fanSectionRef.current,
-          start: "top 75%",   // Starts animating when section enters viewport
-          end: "center 40%",  // Finishes assembling as it reaches the middle
-          scrub: 1,           // Smooth scroll tie-in
+          start: "top 75%",   
+          end: "center 40%",  
+          scrub: 1.5,           
         }
       });
 
-      // Animate them snapping into place one by one
-      tl.to(".petal-2", { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.5)" })
-        .to(".petal-3", { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.5)" })
-        .to(".petal-4", { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.5)" });
+      // Unfold animation: Petals rotate into their proper quadrants
+      tl.to(".petal-2", { rotation: 90, duration: 1, ease: "power2.inOut" }, 0)
+        .to(".petal-3", { rotation: 180, duration: 1, ease: "power2.inOut" }, 0)
+        .to(".petal-4", { rotation: 270, duration: 1, ease: "power2.inOut" }, 0);
 
       // Optional: Add a slow continuous spin to the whole fan after it builds
       gsap.to(".full-fan", {
@@ -294,22 +292,26 @@ const About = () => {
       ========================================= */}
       <svg width="0" height="0" className="absolute hidden">
         <defs>
-          {/* This exact clip path creates the "Curved Petal / Arch" shape from your reference image */}
-          <clipPath id="hero-wedge" clipPathUnits="objectBoundingBox">
-            <path d="M 0.05 0.2 Q 0.5 -0.05 0.95 0.2 L 0.8 1 Q 0.5 0.8 0.2 1 Z" />
+          {/* This is the EXACT "Arc/Wedge" shape from the Ronaldo screenshot.
+            - Top curve arches up slightly
+            - Bottom curve arches up to match
+            - Sides slope inwards
+          */}
+          <clipPath id="cinematic-wedge" clipPathUnits="objectBoundingBox">
+            <path d="M 0 0.2 Q 0.5 -0.1 1 0.2 L 0.85 1 Q 0.5 0.7 0.15 1 Z" />
           </clipPath>
         </defs>
       </svg>
 
       {/* =========================================
-          1. HERO VIDEO SECTION (Petal Shaped)
+          1. HERO VIDEO SECTION (Cinematic Frame)
       ========================================= */}
       <section className="relative w-full pt-32 pb-20 flex justify-center items-center bg-black">
         
         {/* Container with the custom SVG Clip Path applied */}
         <div 
-          className="relative w-[90%] max-w-6xl aspect-[16/9] md:aspect-[21/9] bg-neutral-900 flex justify-center items-center group cursor-pointer"
-          style={{ clipPath: "url(#hero-wedge)" }}
+          className="relative w-[95%] max-w-6xl aspect-[16/9] md:aspect-[21/9] bg-neutral-900 flex justify-center items-center group cursor-pointer"
+          style={{ clipPath: "url(#cinematic-wedge)" }}
         >
           {/* Replace this img with your actual <video> tag */}
           <img 
@@ -319,7 +321,7 @@ const About = () => {
           />
           <div className="absolute inset-0 bg-[#2eaff0]/10 mix-blend-overlay"></div>
           
-          {/* Play Button exactly like the reference */}
+          {/* Play Button Exactly Like Reference */}
           <div className="relative z-10 w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center pl-2 shadow-[0_0_40px_rgba(255,255,255,0.3)] group-hover:scale-110 transition-transform duration-300">
              <svg width="32" height="32" viewBox="0 0 24 24" fill="black"><path d="M5 3l14 9-14 9V3z"/></svg>
           </div>
@@ -438,30 +440,35 @@ const About = () => {
       </section>
 
       {/* =========================================
-          4. IMPACTS PEOPLE (1/4 to Full Fan Animation)
+          4. IMPACTS PEOPLE (Unfolding Fan Animation)
       ========================================= */}
       <section ref={fanSectionRef} className="py-32 md:py-48 px-6 container mx-auto max-w-7xl">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
           
-          {/* Left: Building Geometric Fan */}
+          {/* Left: Unfolding Geometric Fan */}
           <div className="flex justify-center md:justify-start">
             <div className="w-72 h-72 md:w-[500px] md:h-[500px]">
               
               {/* SVG wrapped in a group for the final continuous rotation */}
-              <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_30px_rgba(46,175,240,0.2)]">
-                <g className="full-fan">
+              <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_30px_rgba(46,175,240,0.2)] overflow-visible">
+                <g className="full-fan" style={{ transformOrigin: '50px 50px' }}>
+                  
+                  {/* All petals use the EXACT Dentsu semi-circle shape.
+                    They all start at the same position (0 degrees) and unfold!
+                  */}
+                  
                   {/* Petal 1: Always visible (Starts at 1/4) */}
-                  <path className="petal-1 fill-white" d="M 50 50 L 50 5 A 45 45 0 0 1 95 50 Z" />
+                  <path className="petal-1" fill="white" d="M 50 50 L 50 0 A 25 25 0 0 1 50 50 Z" style={{ transformOrigin: '50px 50px' }} />
                   
-                  {/* Petal 2: Animates in */}
-                  <path className="petal-2 fill-white" d="M 50 50 L 95 50 A 45 45 0 0 1 50 95 Z" />
+                  {/* Petal 2: Unfolds to 90deg */}
+                  <path className="petal-2" fill="white" d="M 50 50 L 50 0 A 25 25 0 0 1 50 50 Z" style={{ transformOrigin: '50px 50px' }} />
                   
-                  {/* Petal 3: Animates in */}
-                  <path className="petal-3 fill-white" d="M 50 50 L 50 95 A 45 45 0 0 1 5 50 Z" />
+                  {/* Petal 3: Unfolds to 180deg */}
+                  <path className="petal-3" fill="white" d="M 50 50 L 50 0 A 25 25 0 0 1 50 50 Z" style={{ transformOrigin: '50px 50px' }} />
                   
-                  {/* Petal 4: Animates in */}
-                  {/* Giving this one the accent color for a pop of branding */}
-                  <path className="petal-4 fill-[#2eaff0]" d="M 50 50 L 5 50 A 45 45 0 0 1 50 5 Z" />
+                  {/* Petal 4: Unfolds to 270deg (With accent color) */}
+                  <path className="petal-4" fill="#2eaff0" d="M 50 50 L 50 0 A 25 25 0 0 1 50 50 Z" style={{ transformOrigin: '50px 50px' }} />
+
                 </g>
               </svg>
 
