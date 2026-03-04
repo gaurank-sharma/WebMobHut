@@ -162,7 +162,7 @@ const About = () => {
     {/* Section Title */}
     <div className="md:col-span-4">
       <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-[#2eaff0]">
-        Creative <br className="hidden md:block"/> Leaders
+        Creative <br className="hidden md:block"/> Leader
       </h3>
     </div>
     
