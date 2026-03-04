@@ -472,12 +472,11 @@ const Home = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
                   /> */}
 
-                          <img 
-                      src={service.image} 
-                      alt={service.title} 
-                     {/* Added 'md:grayscale' and 'md:opacity-70' to apply monochrome only on screens tablet/laptop and above. Mobile gets full color (grayscale-0) and full opacity. */}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-100 md:opacity-70 md:grayscale group-hover:opacity-100 group-hover:grayscale-0" 
-                   />
+                        <img 
+            src={service.image} 
+            alt={service.title} 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-0 opacity-100 md:grayscale md:opacity-70 group-hover:grayscale-0 group-hover:opacity-100" 
+              />
                 </div>
                 <div className="p-8">
                   <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#2eaff0] transition-colors line-clamp-2">
