@@ -466,11 +466,18 @@ const Home = () => {
               >
                 <div className="h-64 overflow-hidden relative">
                   <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-colors duration-500 z-10 mix-blend-overlay"></div>
-                  <img 
+                  {/* <img 
                     src={service.image} 
                     alt={service.title} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
-                  />
+                  /> */}
+
+                          <img 
+                      src={service.image} 
+                      alt={service.title} 
+                     {/* Added 'md:grayscale' and 'md:opacity-70' to apply monochrome only on screens tablet/laptop and above. Mobile gets full color (grayscale-0) and full opacity. */}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-100 md:opacity-70 md:grayscale group-hover:opacity-100 group-hover:grayscale-0" 
+                   />
                 </div>
                 <div className="p-8">
                   <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#2eaff0] transition-colors line-clamp-2">
