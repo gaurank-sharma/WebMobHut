@@ -174,7 +174,7 @@ const About = () => {
         <div className="bg-white p-2 md:p-4 aspect-square shadow-2xl">
           <div className="w-full h-full bg-neutral-200 overflow-hidden relative group">
             <img 
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" 
+              src="/Viraj_ratra.jpeg" 
               alt="Viraj Ratra" 
               className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
             />
