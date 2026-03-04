@@ -147,8 +147,6 @@
 // export default Navbar;
 
 
-
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -180,7 +178,8 @@ const Navbar = () => {
     { name: 'Services', path: '/services' },
     { name: 'Gallery', path: '/gallery' },
   ];
-return (
+
+  return (
     <>
       {/* BULLETPROOF FIXED POSITIONING */}
       <nav 
@@ -290,5 +289,6 @@ return (
       </nav>
     </>
   );
+};
 
 export default Navbar;
