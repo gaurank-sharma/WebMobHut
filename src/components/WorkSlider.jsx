@@ -215,7 +215,7 @@ const WorkSlider = () => {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${scrollWidth + 1000}`, 
+          end: () => `+=${scrollWidth + 1000}`, // Adding 1000 smooths the scroll speed
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -240,15 +240,15 @@ const WorkSlider = () => {
             ease: "power3.out",
             scrollTrigger: {
               trigger: item,
-              start: "top bottom-=50px", 
-              toggleActions: "play none none reverse" 
+              start: "top bottom-=50px", // Trigger when 50px from the bottom
+              toggleActions: "play none none reverse" // Reverses when scrolled back up
             }
           }
         );
       });
     });
 
-    return () => ctx.revert(); 
+    return () => ctx.revert(); // Clean up on unmount/resize
   }, []);
 
   return (
