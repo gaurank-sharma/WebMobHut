@@ -231,16 +231,16 @@ const WorkSlider = () => {
         gsap.fromTo(item, 
           { 
             opacity: 0, 
-            y: 50 
+            y: 100 
           },
           {
             opacity: 1,
             y: 0,
             duration: 1,
-            ease: "power3.out",
+            ease: "back.out(1.4)",
             scrollTrigger: {
               trigger: item,
-              start: "top bottom-=50px", // Trigger when 50px from the bottom
+              start: "top bottom-=100px", // Trigger when 100px from the bottom
               toggleActions: "play none none reverse" // Reverses when scrolled back up
             }
           }
@@ -314,7 +314,7 @@ const WorkSlider = () => {
       </div>
 
       {/* =========================================
-          MOBILE VIEW (Fully Overlapping & Alternating)
+          MOBILE VIEW (Alternating 80% Width Layout)
           Visible on mobile, hidden on laptops/desktops
       ========================================= */}
       <div 
@@ -324,30 +324,27 @@ const WorkSlider = () => {
         
         {/* Header Block */}
         <div className="mb-16 px-2">
-          <span className="text-[#2eaff0] font-bold tracking-[0.2em] uppercase text-[10px] mb-3 block">Our Portfolio</span>
-          <h2 className="text-5xl font-black text-white tracking-tight leading-none">
-            Recent <br /> Executions
+          <span className="text-[#2eaff0] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Work</span>
+          <h2 className="text-5xl font-black text-white tracking-tight uppercase leading-none">
+            Selected <br /> projects
           </h2>
         </div>
 
-        {/* Alternating & Overlapping Layout */}
-        <div className="flex flex-col relative pb-10">
+        {/* Alternating Layout (1 Left, 1 Right) */}
+        <div className="flex flex-col">
           {sliderImages.map((item, index) => {
-            // Determine alignment: Evens = Left Side, Odds = Right Side
+            // Determine if the item should align left or right (Evens = Left, Odds = Right)
             const isLeft = index % 2 === 0;
             
             return (
               <Link 
                 key={item.id} 
                 to="/gallery" 
-                // Z-index increases so each image stacks securely ON TOP of the previous one
-                style={{ zIndex: index }} 
-                className={`mobile-portfolio-item block relative w-[80%] aspect-[4/5] bg-black group overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.9)] border border-white/5 ${
-                  isLeft ? "self-start" : "self-end"
-                } ${
-                  // HUGE negative margin creates the deep overlapping effect (50% of parent width)
-                  index > 0 ? "-mt-[50%]" : "" 
-                }`}
+                className={`mobile-portfolio-item block relative w-[82%] aspect-[4/5] bg-black group overflow-hidden shadow-2xl ${
+                  isLeft 
+                    ? "self-start z-10" // Left side positioning
+                    : "self-end z-20 -mt-24" // Right side positioning with negative margin to pull it up into the empty space
+                } ${index > 1 && isLeft ? "mt-4" : ""}`} // Small gap before the next left item starts
               >
                 
                 <img 
@@ -357,28 +354,27 @@ const WorkSlider = () => {
                   loading="lazy" 
                 />
                 
-                {/* Heavy bottom gradient to ensure text readability against the deep overlap */}
-                <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+                {/* Gradient for text legibility */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
 
+                {/* Subtle Blue Hover Overlay */}
                 <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-colors duration-500 z-10 mix-blend-overlay"></div>
 
-                {/* Dynamic Text Overlay - Swaps sides based on image alignment so text isn't covered */}
-                <div className={`absolute bottom-6 z-20 flex flex-col ${isLeft ? "left-6 text-left" : "right-6 text-right items-end"}`}>
-                  <p className="text-[10px] font-black tracking-[0.2em] uppercase text-[#2eaff0] mb-1">
-                    {item.category || "EVENTS"}
+                {/* Text Overlay (Matches your reference image style perfectly) */}
+                <div className="absolute bottom-5 left-5 text-white z-20 pr-10">
+                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#2eaff0] mb-1.5 drop-shadow-md">
+                    {item.category || "Event Production"}
                   </p>
-                  <h3 className="text-2xl font-bold tracking-wide text-white drop-shadow-lg">
+                  <h3 className="text-xl font-bold tracking-wide leading-tight text-white drop-shadow-md">
                     {item.title || `Execution ${index + 1}`}
                   </h3>
                 </div>
 
-                {/* Thin Architectural Arrow - Opposite side of the text */}
-                <div className={`absolute bottom-6 z-20 opacity-90 group-hover:opacity-100 transition-all duration-300 ${
-                  isLeft ? "right-6 group-hover:translate-x-1 group-hover:-translate-y-1" : "left-6 group-hover:-translate-x-1 group-hover:-translate-y-1"
-                }`}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="9 7 17 7 17 15"></polyline>
+                {/* Thin Architectural Arrow */}
+                <div className="absolute bottom-5 right-5 text-white z-20 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
+                    <line x1="6" y1="18" x2="18" y2="6"></line>
+                    <polyline points="8 6 18 6 18 16"></polyline>
                   </svg>
                 </div>
                 
@@ -388,9 +384,8 @@ const WorkSlider = () => {
         </div>
         
         {/* Mobile View All Button */}
-        {/* Added high z-index here so it isn't hidden under the last overlapping image */}
-        <div className="mt-12 px-2 relative z-[50]">
-          <Link to="/gallery" className="block w-full py-5 border border-neutral-800 text-center text-xs tracking-widest uppercase font-bold text-white hover:border-[#2eaff0] hover:text-[#2eaff0] transition-colors shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(46,175,240,0.15)] bg-[#050505]/80 backdrop-blur-md">
+        <div className="mt-20 px-2">
+          <Link to="/gallery" className="block w-full py-5 border border-neutral-800 text-center text-xs tracking-widest uppercase font-bold text-white hover:border-[#2eaff0] hover:text-[#2eaff0] transition-colors shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(46,175,240,0.15)]">
             View All Projects
           </Link>
         </div>
