@@ -181,7 +181,6 @@
 
 
 
-
 import React, { useRef, useEffect } from 'react';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -317,63 +316,77 @@ const WorkSlider = () => {
       </div>
 
       {/* =========================================
-          MOBILE VIEW (Staggered 2-Column Grid)
+          MOBILE VIEW (Alternating 80% Width Layout)
           Visible on mobile, hidden on laptops/desktops
       ========================================= */}
       <div 
         ref={mobileSliderRef} 
-        className="block lg:hidden py-24 px-6 md:px-12 bg-[#050505]"
+        className="block lg:hidden py-24 px-4 bg-[#050505] overflow-hidden"
       >
         
         {/* Header Block */}
-        <div className="mb-20 text-center">
+        <div className="mb-16 px-2">
           <span className="text-[#2eaff0] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Work</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-white tracking-tight uppercase leading-none">
+          <h2 className="text-5xl font-black text-white tracking-tight uppercase leading-none">
             Selected <br /> projects
           </h2>
         </div>
 
-        {/* Staggered 2-Column Grid Layout */}
-        <div className="grid grid-cols-2 gap-4 items-start">
-          {sliderImages.map((item, index) => (
-            <Link 
-              key={item.id} 
-              to="/gallery" 
-              className={`mobile-portfolio-item block relative w-full aspect-[4/5] bg-black group overflow-hidden ${
-                // Condition to stagger: apply large margin-top to items in the right column (index 1, 3, 5, etc.)
-                (index % 2 === 1) ? "mt-[120px] md:mt-[160px]" : ""
-              }`}
-            >
-              
-              <img 
-                src={item.src || item.image} 
-                alt="Portfolio Work" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-hover:opacity-100" 
-                loading="lazy" 
-              />
-              
-              {/* Minimalist Bottom Left Text (No numbers/caps, matches design style) */}
-              <div className="absolute bottom-6 left-6 text-white z-20 flex flex-col justify-end">
-                <p className="text-[11px] md:text-xs font-bold tracking-widest uppercase text-[#2eaff0] mb-1.5 opacity-90">
-                  {item.category || "Event Production"}
-                </p>
-                <h3 className="text-lg md:text-xl font-medium tracking-wide leading-tight drop-shadow-md">
-                  {item.title || `Execution ${index + 1}`}
-                </h3>
-              </div>
+        {/* Alternating Layout (1 Left, 1 Right) */}
+        <div className="flex flex-col">
+          {sliderImages.map((item, index) => {
+            // Determine if the item should align left or right (Evens = Left, Odds = Right)
+            const isLeft = index % 2 === 0;
+            
+            return (
+              <Link 
+                key={item.id} 
+                to="/gallery" 
+                className={`mobile-portfolio-item block relative w-[82%] aspect-[4/5] bg-black group overflow-hidden shadow-2xl ${
+                  isLeft 
+                    ? "self-start z-10" // Left side positioning
+                    : "self-end z-20 -mt-24" // Right side positioning with negative margin to pull it up into the empty space
+                } ${index > 1 && isLeft ? "mt-4" : ""}`} // Small gap before the next left item starts
+              >
+                
+                <img 
+                  src={item.src || item.image} 
+                  alt="Portfolio Work" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                  loading="lazy" 
+                />
+                
+                {/* Gradient for text legibility */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
 
-              {/* Minimal Gradient Overlay just for text legibility */}
-              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                {/* Subtle Blue Hover Overlay */}
+                <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-colors duration-500 z-10 mix-blend-overlay"></div>
 
-              {/* Subtle Blue Hover Overlay */}
-              <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-colors duration-500 z-10 mix-blend-overlay"></div>
+                {/* Text Overlay (Matches your reference image style perfectly) */}
+                <div className="absolute bottom-5 left-5 text-white z-20 pr-10">
+                  <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#2eaff0] mb-1.5 drop-shadow-md">
+                    {item.category || "Event Production"}
+                  </p>
+                  <h3 className="text-xl font-bold tracking-wide leading-tight text-white drop-shadow-md">
+                    {item.title || `Execution ${index + 1}`}
+                  </h3>
+                </div>
 
-            </Link>
-          ))}
+                {/* Thin Architectural Arrow */}
+                <div className="absolute bottom-5 right-5 text-white z-20 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square">
+                    <line x1="6" y1="18" x2="18" y2="6"></line>
+                    <polyline points="8 6 18 6 18 16"></polyline>
+                  </svg>
+                </div>
+                
+              </Link>
+            );
+          })}
         </div>
         
         {/* Mobile View All Button */}
-        <div className="mt-20 md:mt-32">
+        <div className="mt-20 px-2">
           <Link to="/gallery" className="block w-full py-5 border border-neutral-800 text-center text-xs tracking-widest uppercase font-bold text-white hover:border-[#2eaff0] hover:text-[#2eaff0] transition-colors shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(46,175,240,0.15)]">
             View All Projects
           </Link>
