@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
 
 @import "tailwindcss";
 
@@ -17,7 +17,7 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -27,4 +27,51 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #31A9E9; 
   border-radius: 4px;
+} */
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  /* Updated to match your cinematic dark theme */
+  background-color: #000000; 
+  color: #ffffff;
+  
+  /* REMOVED overflow-x: hidden; from here! It breaks fixed navbars. */
+  /* If you need to hide horizontal scrolling, we do it on a wrapper div in App.jsx, never on the body. */
+}
+
+/* Ensure React Root takes full width/height without Vite's default padding/centering */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.font-heading {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a; 
+}
+::-webkit-scrollbar-thumb {
+  background: #2eaff0; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff; 
 }
