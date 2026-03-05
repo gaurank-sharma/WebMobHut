@@ -342,8 +342,8 @@ const WorkSlider = () => {
                 to="/gallery" 
                 className={`mobile-portfolio-item block relative w-[82%] aspect-[4/5] bg-black group overflow-hidden shadow-2xl ${
                   isLeft 
-                    ? "self-start z-10" // Left side positioning
-                    : "self-end z-20 " // Right side positioning with negative margin to pull it up into the empty space -mt-24
+                    ? "self-start z-10 mt-5" // Left side positioning
+                    : "self-end z-20 mb-5" // Right side positioning with negative margin to pull it up into the empty space -mt-24
                 } ${index > 1 && isLeft ? "mt-4" : ""}`} // Small gap before the next left item starts
               >
                 
