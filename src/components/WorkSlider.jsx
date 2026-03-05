@@ -182,7 +182,6 @@
 
 
 
-
 import React, { useRef, useEffect } from 'react';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -200,15 +199,17 @@ const WorkSlider = () => {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef(null);
 
+  // Refs for GSAP Mobile Animation
+  const mobileSliderRef = useRef(null);
+
   useEffect(() => {
-    // GSAP MatchMedia ensures the scroll pin ONLY happens on laptops/desktops
     let ctx = gsap.matchMedia();
 
+    // === DESKTOP GSAP: Horizontal Scroll ===
     ctx.add("(min-width: 1024px)", () => {
       const section = sectionRef.current;
       const scrollContainer = scrollContainerRef.current;
       
-      // Calculate total scroll distance based on content width
       const scrollWidth = scrollContainer.scrollWidth - window.innerWidth;
 
       gsap.to(scrollContainer, {
@@ -225,6 +226,31 @@ const WorkSlider = () => {
       });
     });
 
+    // === MOBILE GSAP: Fade-in animation ===
+    ctx.add("(max-width: 1023px)", () => {
+      const portfolioItems = mobileSliderRef.current.querySelectorAll('.mobile-portfolio-item');
+      
+      portfolioItems.forEach(item => {
+        gsap.fromTo(item, 
+          { 
+            opacity: 0, 
+            y: 100 
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "back.out(1.4)",
+            scrollTrigger: {
+              trigger: item,
+              start: "top bottom-=100px", // Trigger when 100px from the bottom
+              toggleActions: "play none none reverse" // Reverses when scrolled back up
+            }
+          }
+        );
+      });
+    });
+
     return () => ctx.revert(); // Clean up on unmount/resize
   }, []);
 
@@ -233,7 +259,7 @@ const WorkSlider = () => {
       
       {/* =========================================
           DESKTOP VIEW (GSAP Horizontal Scroll)
-          Hidden on mobile, visible on lg screens
+          Visible on laptops/desktops, hidden on mobile
       ========================================= */}
       <div 
         ref={scrollContainerRef} 
@@ -265,7 +291,6 @@ const WorkSlider = () => {
                 <img 
                   src={item.src || item.image} 
                   alt="Portfolio Work" 
-                  // REMOVED grayscale. Image will always be in full color.
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                 />
                 <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/10 transition-colors duration-500 z-10 mix-blend-overlay"></div>
@@ -273,7 +298,6 @@ const WorkSlider = () => {
               
               {/* Minimalist Overlay Text */}
               <div className="absolute top-1/2 -left-12 -translate-y-1/2 flex items-center gap-4 z-20 pointer-events-none">
-                {/* Number colored in your theme blue */}
                 <span className="text-3xl font-black tracking-widest text-[#2eaff0] drop-shadow-md">
                   0{index + 1}/
                 </span>
@@ -293,61 +317,64 @@ const WorkSlider = () => {
       </div>
 
       {/* =========================================
-          MOBILE / TABLET VIEW (Vertical Stack)
-          Visible on mobile, hidden on lg screens
+          MOBILE VIEW (Staggered 2-Column Grid)
+          Visible on mobile, hidden on laptops/desktops
       ========================================= */}
-      <div className="block lg:hidden py-20 px-4 md:px-6 bg-[#050505]">
+      <div 
+        ref={mobileSliderRef} 
+        className="block lg:hidden py-24 px-6 md:px-12 bg-[#050505]"
+      >
         
-        {/* Mobile Header */}
-        <div className="mb-10">
-          <span className="text-[#2eaff0] font-bold tracking-widest text-xs uppercase mb-3 block">Our Portfolio</span>
-          <h2 className="text-4xl md:text-5xl font-medium text-white leading-tight tracking-tight">Recent Executions</h2>
+        {/* Header Block */}
+        <div className="mb-20 text-center">
+          <span className="text-[#2eaff0] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Work</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-white tracking-tight uppercase leading-none">
+            Selected <br /> projects
+          </h2>
         </div>
 
-        {/* Vertically Stacked Images (Matched to Reference Design) */}
-        <div className="flex flex-col gap-6">
+        {/* Staggered 2-Column Grid Layout */}
+        <div className="grid grid-cols-2 gap-4 items-start">
           {sliderImages.map((item, index) => (
-            <Link to="/gallery" key={item.id} className="block relative w-full aspect-[4/5] bg-black group overflow-hidden">
+            <Link 
+              key={item.id} 
+              to="/gallery" 
+              className={`mobile-portfolio-item block relative w-full aspect-[4/5] bg-black group overflow-hidden ${
+                // Condition to stagger: apply large margin-top to items in the right column (index 1, 3, 5, etc.)
+                (index % 2 === 1) ? "mt-[120px] md:mt-[160px]" : ""
+              }`}
+            >
               
               <img 
                 src={item.src || item.image} 
                 alt="Portfolio Work" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-hover:opacity-100" 
                 loading="lazy" 
               />
               
-              {/* Subtle Bottom Gradient for Text Legibility */}
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
-              
-              {/* Subtle Blue Hover Overlay */}
-              <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-colors duration-500 z-10 mix-blend-overlay"></div>
-
-              {/* Bottom Left Text (Clean & Minimal) */}
-              <div className="absolute bottom-6 left-6 text-white z-20">
-                <h3 className="text-xl md:text-2xl font-medium tracking-wide">
-                  {item.title || `Execution ${index + 1}`}
-                </h3>
-                <p className="text-sm font-light text-neutral-300 mt-1">
+              {/* Minimalist Bottom Left Text (No numbers/caps, matches design style) */}
+              <div className="absolute bottom-6 left-6 text-white z-20 flex flex-col justify-end">
+                <p className="text-[11px] md:text-xs font-bold tracking-widest uppercase text-[#2eaff0] mb-1.5 opacity-90">
                   {item.category || "Event Production"}
                 </p>
+                <h3 className="text-lg md:text-xl font-medium tracking-wide leading-tight drop-shadow-md">
+                  {item.title || `Execution ${index + 1}`}
+                </h3>
               </div>
 
-              {/* Bottom Right Ultra-Thin Diagonal Arrow */}
-              <div className="absolute bottom-6 right-6 text-white z-20 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
-                {/* Custom SVG for the exact thin architectural arrow */}
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.75" strokeLinecap="square" strokeLinejoin="miter">
-                  <line x1="6" y1="18" x2="18" y2="6"></line>
-                  <polyline points="8 6 18 6 18 16"></polyline>
-                </svg>
-              </div>
+              {/* Minimal Gradient Overlay just for text legibility */}
+              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+
+              {/* Subtle Blue Hover Overlay */}
+              <div className="absolute inset-0 bg-[#2eaff0]/0 group-hover:bg-[#2eaff0]/20 transition-colors duration-500 z-10 mix-blend-overlay"></div>
 
             </Link>
           ))}
         </div>
         
         {/* Mobile View All Button */}
-        <div className="mt-12">
-          <Link to="/gallery" className="block w-full py-5 bg-transparent border border-neutral-700 text-center text-sm tracking-widest uppercase font-bold text-white rounded-full hover:border-[#2eaff0] hover:text-[#2eaff0] transition-colors shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(46,175,240,0.15)]">
+        <div className="mt-20 md:mt-32">
+          <Link to="/gallery" className="block w-full py-5 border border-neutral-800 text-center text-xs tracking-widest uppercase font-bold text-white hover:border-[#2eaff0] hover:text-[#2eaff0] transition-colors shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(46,175,240,0.15)]">
             View All Projects
           </Link>
         </div>
