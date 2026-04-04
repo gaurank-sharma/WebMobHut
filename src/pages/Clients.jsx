@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ExternalLink, Award, Handshake, Target } from 'lucide-react';
 
-const API = 'http://localhost:4000/api';
+const API = 'https://web-mob-hut-backend.vercel.app/api';
 
 const WHY = [
   { icon: Target, title: 'Strategic Thinking', desc: 'We align every event with your brand vision and business objectives.' },

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Phone, Mail, Globe, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 
-const API = 'http://localhost:4000/api';
+const API = 'https://web-mob-hut-backend.vercel.app/api';
 
 const ContactUs = () => {
   const [form, setForm] = useState({

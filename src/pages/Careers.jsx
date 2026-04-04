@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Briefcase, Clock, ChevronRight, Search } from 'lucide-react';
 
-const API = 'http://localhost:4000/api';
+const API = 'https://web-mob-hut-backend.vercel.app/api';
 
 const TYPE_COLORS = {
   'full-time':  'bg-green-500/10 text-green-400 border-green-500/20',

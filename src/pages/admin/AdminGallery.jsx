@@ -6,7 +6,7 @@ const CATEGORIES = ['all', 'events', 'activations', 'corporate', 'decor', 'team'
 
 export default function AdminGallery() {
   const { authFetch, token } = useAdminAuth();
-  const API = 'http://localhost:4000/api';
+  const API = 'https://web-mob-hut-backend.vercel.app/api';
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('all');
   const [loading, setLoading] = useState(true);

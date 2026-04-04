@@ -6,7 +6,7 @@ const EMPTY = { name: '', website: '', industry: '', description: '', isFeatured
 
 export default function AdminClients() {
   const { authFetch, token } = useAdminAuth();
-  const API = 'http://localhost:4000/api';
+  const API = 'https://web-mob-hut-backend.vercel.app/api';
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);

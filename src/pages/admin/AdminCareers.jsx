@@ -12,7 +12,7 @@ const TypeBadge = ({ type }) => {
 
 export default function AdminCareers() {
   const { authFetch, token } = useAdminAuth();
-  const API = 'http://localhost:4000/api';
+  const API = 'https://web-mob-hut-backend.vercel.app/api';
   const [careers, setCareers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);

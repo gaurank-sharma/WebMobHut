@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const AdminAuthContext = createContext(null);
-const API = 'http://localhost:4000/api';
+const API = 'https://web-mob-hut-backend.vercel.app/api';
 
 export const AdminAuthProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
