@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { MapPin, Briefcase, Clock, ChevronRight, Search } from 'lucide-react';
 
 const API = 'https://web-mob-hut-backend.vercel.app/api';
@@ -225,15 +224,18 @@ export default function Careers() {
                         )}
                       </div>
 
-                      <div className="flex items-center gap-3 pt-2">
+                      <div className="flex flex-wrap items-center gap-3 pt-2">
                         <a
-                          href={`mailto:${job.applicationEmail || 'careers@webmobhut.com'}?subject=Application for ${job.title}`}
+                          href="/contact"
                           className="px-7 py-3 bg-[#2eaff0] text-black font-bold tracking-widest text-xs uppercase rounded-full hover:bg-white transition-colors duration-300 shadow-[0_0_15px_rgba(46,175,240,0.2)]"
                         >
                           Apply Now
                         </a>
-                        <span className="text-gray-600 text-xs">
-                          Send your CV to {job.applicationEmail || 'careers@webmobhut.com'}
+                        <span className="text-gray-500 text-xs">
+                          or email your CV to{' '}
+                          <span className="text-[#2eaff0] select-all">
+                            {job.applicationEmail || 'webmobhut@gmail.com'}
+                          </span>
                         </span>
                       </div>
                     </div>

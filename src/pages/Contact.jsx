@@ -1,5 +1,23 @@
 import { useState } from 'react';
-import { Phone, Mail, Globe, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
+import { Phone, Mail, Globe, CheckCircle, AlertCircle } from 'lucide-react';
+
+function MapPin({ top, left, label, sub, primary = false }) {
+  return (
+    <div className={`absolute group`} style={{ top, left }}>
+      <div className={`rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-125 ${
+        primary ? 'w-10 h-10 bg-[#2eaff0]/25 animate-pulse' : 'w-7 h-7 bg-white/10'
+      }`}>
+        <div className={`rounded-full ${
+          primary ? 'w-3.5 h-3.5 bg-[#2eaff0] shadow-[0_0_10px_#2eaff0]' : 'w-2 h-2 bg-white/70'
+        }`} />
+      </div>
+      <div className="absolute top-0 left-6 bg-neutral-900/95 border border-neutral-700 px-2.5 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
+        <p className={`font-bold text-xs ${primary ? 'text-[#2eaff0]' : 'text-white'}`}>{label}</p>
+        {sub && <p className="text-neutral-400 text-[10px]">{sub}</p>}
+      </div>
+    </div>
+  );
+}
 
 const API = 'https://web-mob-hut-backend.vercel.app/api';
 
@@ -81,8 +99,8 @@ const ContactUs = () => {
                 </div>
                 <div className="h-px bg-neutral-800" />
                 {[
-                  { icon: Phone, label: '+91-8860585993', href: 'tel:+918860585993' },
-                  { icon: Mail, label: 'bhavishya39@gmail.com', href: 'mailto:bhavishya39@gmail.com' },
+                  { icon: Phone, label: '+91-9910319121', href: 'tel:+919910319121' },
+                  { icon: Mail, label: 'webmobhut@gmail.com', href: 'mailto:webmobhut@gmail.com' },
                   { icon: Globe, label: 'www.webmobhut.com', href: 'https://www.webmobhut.com' },
                   { icon: MapPin, label: 'Delhi NCR & Bangalore', href: null },
                 ].map(({ icon: Icon, label, href }) => (
@@ -233,42 +251,63 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* ── NATIONAL IMPACT MAP ── */}
+      {/* ── PAN INDIA MAP ── */}
       <section className="bg-neutral-950 py-24 px-6 border-t border-neutral-800">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-6">
             <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#2eaff0] mb-2 block">WebMobHut</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">National Impact</h2>
-            <div className="h-0.5 w-20 bg-[#2eaff0] mx-auto mt-5" />
+            <h2 className="text-4xl md:text-5xl font-bold text-white">We Work PAN India</h2>
+            <div className="h-0.5 w-20 bg-[#2eaff0] mx-auto mt-5 mb-4" />
+            <p className="text-gray-500 text-sm">Delivering extraordinary experiences across every corner of India</p>
           </div>
-          <div className="relative max-w-3xl mx-auto aspect-[16/10] bg-black rounded-3xl border border-neutral-800 shadow-2xl overflow-hidden flex items-center justify-center">
+
+          {/* City pills */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {['Delhi NCR', 'Mumbai', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Jaipur', 'Ahmedabad', 'Lucknow', 'Chandigarh', 'Surat'].map((city) => (
+              <span key={city} className="text-xs px-3 py-1.5 bg-[#2eaff0]/10 text-[#2eaff0] border border-[#2eaff0]/20 rounded-full">{city}</span>
+            ))}
+          </div>
+
+          <div className="relative max-w-3xl mx-auto aspect-[16/11] bg-black rounded-3xl border border-neutral-800 shadow-2xl overflow-hidden flex items-center justify-center">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/b/b4/India_outline.svg"
               alt="India Map"
-              className="w-full h-full object-contain filter invert opacity-30 pointer-events-none"
+              className="w-full h-full object-contain filter invert opacity-25 pointer-events-none"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50 pointer-events-none" />
-            {/* Delhi pin */}
-            <div className="absolute top-[38%] left-[40%] group">
-              <div className="w-10 h-10 bg-[#2eaff0]/20 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 animate-pulse group-hover:scale-125 transition-transform">
-                <div className="w-3 h-3 bg-[#2eaff0] rounded-full shadow-[0_0_12px_#2eaff0]" />
-              </div>
-              <div className="absolute top-1 left-7 bg-neutral-900 border border-neutral-700 p-2.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
-                <p className="font-bold text-white text-xs">Delhi NCR</p>
-                <p className="text-neutral-400 text-[10px]">Delhi · Noida · Gurgaon</p>
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-40 pointer-events-none" />
+
+            {/* ── PINS ── */}
+            {/* Delhi NCR — primary HQ */}
+            <MapPin top="37%" left="39%" label="Delhi NCR" sub="Delhi · Noida · Gurgaon" primary />
+            {/* Jaipur */}
+            <MapPin top="43%" left="33%" label="Jaipur" sub="Rajasthan" />
+            {/* Lucknow */}
+            <MapPin top="42%" left="50%" label="Lucknow" sub="Uttar Pradesh" />
+            {/* Chandigarh */}
+            <MapPin top="30%" left="37%" label="Chandigarh" sub="Punjab" />
+            {/* Ahmedabad */}
+            <MapPin top="53%" left="27%" label="Ahmedabad" sub="Gujarat" />
+            {/* Mumbai */}
+            <MapPin top="61%" left="27%" label="Mumbai" sub="Maharashtra" />
+            {/* Pune */}
+            <MapPin top="65%" left="30%" label="Pune" sub="Maharashtra" />
+            {/* Hyderabad */}
+            <MapPin top="67%" left="43%" label="Hyderabad" sub="Telangana" />
+            {/* Kolkata */}
+            <MapPin top="53%" left="62%" label="Kolkata" sub="West Bengal" />
+            {/* Bangalore — secondary HQ */}
+            <MapPin top="74%" left="41%" label="Bangalore" sub="Karnataka" primary />
+            {/* Chennai */}
+            <MapPin top="77%" left="47%" label="Chennai" sub="Tamil Nadu" />
+            {/* Surat */}
+            <MapPin top="56%" left="26%" label="Surat" sub="Gujarat" />
+
+            <div className="absolute bottom-3 left-4 text-[10px] text-neutral-600">
+              © WebMobHut Pvt Ltd — PAN India Operations
             </div>
-            {/* Bangalore pin */}
-            <div className="absolute top-[73%] left-[41%] group">
-              <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform">
-                <div className="w-2.5 h-2.5 bg-white rounded-full" />
-              </div>
-              <div className="absolute top-1 left-6 bg-neutral-900 border border-neutral-700 p-2.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
-                <p className="font-bold text-white text-xs">Bangalore</p>
-              </div>
-            </div>
-            <div className="absolute bottom-4 left-4 text-[10px] text-neutral-600">
-              © WebMobHut Pvt Ltd — Delhi NCR & Bangalore
+            <div className="absolute bottom-3 right-4 flex items-center gap-3 text-[10px] text-neutral-600">
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-[#2eaff0] rounded-full inline-block" /> HQ</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-white/60 rounded-full inline-block" /> City</span>
             </div>
           </div>
         </div>
