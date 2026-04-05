@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { MessageSquare, Briefcase, Building2, Image, Users, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const StatCard = ({ icon: Icon, label, value, color, sub }) => (
-  <div className="bg-[#0f0f0f] border border-[#1e1e1e] rounded-xl p-5 flex items-start gap-4 hover:border-[#2a2a2a] transition-colors">
-    <div className={`p-2.5 rounded-lg ${color}`}>
-      <Icon size={20} className="text-white" />
+const StatCard = ({ icon: Icon, label, value, color, sub, href }) => {
+  const navigate = useNavigate();
+  return (
+    <div
+      onClick={() => href && navigate(href)}
+      className={`bg-[#0f0f0f] border border-[#1e1e1e] rounded-xl p-5 flex items-start gap-4 transition-all
+        ${href ? 'cursor-pointer hover:border-[#2eaff0]/40 hover:bg-[#2eaff0]/5' : 'hover:border-[#2a2a2a]'}`}
+    >
+      <div className={`p-2.5 rounded-lg ${color}`}>
+        <Icon size={20} className="text-white" />
+      </div>
+      <div>
+        <p className="text-gray-400 text-xs mb-0.5">{label}</p>
+        <p className="text-white text-2xl font-semibold">{value ?? '—'}</p>
+        {sub && <p className="text-[#2eaff0] text-xs mt-0.5">{sub}</p>}
+      </div>
     </div>
-    <div>
-      <p className="text-gray-400 text-xs mb-0.5">{label}</p>
-      <p className="text-white text-2xl font-semibold">{value ?? '—'}</p>
-      {sub && <p className="text-[#2eaff0] text-xs mt-0.5">{sub}</p>}
-    </div>
-  </div>
-);
+  );
+};
 
 const statusColor = {
   new: 'bg-[#2eaff0]/10 text-[#2eaff0]',
@@ -50,12 +58,12 @@ export default function AdminDashboard() {
   }
 
   const statCards = [
-    { icon: MessageSquare, label: 'Total Contacts', value: stats?.totalContacts, color: 'bg-[#2eaff0]/20', sub: `${stats?.newContacts || 0} new` },
-    { icon: Briefcase, label: 'Active Jobs', value: stats?.activeCareers, color: 'bg-purple-500/20' },
-    { icon: Building2, label: 'Clients', value: stats?.activeClients, color: 'bg-green-500/20' },
-    { icon: Image, label: 'Gallery Images', value: stats?.galleryImages, color: 'bg-orange-500/20' },
-    { icon: Users, label: 'Team Members', value: stats?.teamMembers, color: 'bg-pink-500/20' },
-    { icon: TrendingUp, label: 'New Inquiries', value: stats?.newContacts, color: 'bg-yellow-500/20', sub: 'Need attention' },
+    { icon: MessageSquare, label: 'Total Contacts', value: stats?.totalContacts, color: 'bg-[#2eaff0]/20', sub: `${stats?.newContacts || 0} new`, href: '/admin/contacts' },
+    { icon: Briefcase,     label: 'Active Jobs',    value: stats?.activeCareers,  color: 'bg-purple-500/20', href: '/admin/careers' },
+    { icon: Building2,     label: 'Clients',        value: stats?.activeClients,  color: 'bg-green-500/20',  href: '/admin/clients' },
+    { icon: Image,         label: 'Gallery Images', value: stats?.galleryImages,  color: 'bg-orange-500/20', href: '/admin/gallery' },
+    { icon: Users,         label: 'Team Members',   value: stats?.teamMembers,    color: 'bg-pink-500/20',   href: '/admin/members' },
+    { icon: TrendingUp,    label: 'New Inquiries',  value: stats?.newContacts,    color: 'bg-yellow-500/20', sub: 'Need attention', href: '/admin/contacts' },
   ];
 
   return (
