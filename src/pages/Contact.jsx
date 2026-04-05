@@ -292,29 +292,29 @@ const ContactUs = () => {
 
             {/* ── PINS ── */}
             {/* Delhi NCR — primary HQ */}
-            <MapPin top="37%" left="39%" label="Delhi NCR" sub="Delhi · Noida · Gurgaon" primary />
+            <MapPin top="37%" left="40%" label="Delhi NCR" sub="Delhi · Noida · Gurgaon" primary />
             {/* Jaipur */}
-            <MapPin top="43%" left="33%" label="Jaipur" labelDir="left" />
+            <MapPin top="43%" left="37%" label="Jaipur" labelDir="left" />
             {/* Lucknow */}
             <MapPin top="42%" left="50%" label="Lucknow" />
             {/* Chandigarh */}
-            <MapPin top="30%" left="37%" label="Chandigarh" labelDir="left" />
+            <MapPin top="30%" left="38%" label="Chandigarh" labelDir="left" />
             {/* Ahmedabad */}
-            <MapPin top="53%" left="27%" label="Ahmedabad" labelDir="left" />
+            <MapPin top="50%" left="30%" label="Ahmedabad" labelDir="left" />
             {/* Mumbai */}
-            <MapPin top="61%" left="27%" label="Mumbai" labelDir="left" />
+            <MapPin top="63%" left="31%" label="Mumbai" labelDir="left" />
             {/* Pune */}
-            <MapPin top="65%" left="30%" label="Pune" labelDir="left" />
+            <MapPin top="66%" left="33.5%" label="Pune" labelDir="left" />
             {/* Hyderabad */}
-            <MapPin top="67%" left="43%" label="Hyderabad" sub="Telangana" />
+            <MapPin top="64%" left="42%" label="Hyderabad" sub="Telangana" />
             {/* Kolkata */}
-            <MapPin top="53%" left="62%" label="Kolkata" sub="West Bengal" />
+            <MapPin top="49%" left="62%" label="Kolkata" sub="West Bengal" />
             {/* Bangalore — secondary HQ */}
             <MapPin top="74%" left="41%" label="Bangalore" sub="Karnataka" primary />
             {/* Chennai */}
-            <MapPin top="77%" left="47%" label="Chennai" sub="Tamil Nadu" />
+            <MapPin top="77%" left="46%" label="Chennai" sub="Tamil Nadu" />
             {/* Surat */}
-            <MapPin top="56%" left="26%" label="Surat" labelDir="left" />
+            <MapPin top="56%" left="31.5%" label="Surat" labelDir="left" />
 
             <div className="absolute bottom-3 left-4 text-[10px] text-neutral-600">
               © WebMobHut Pvt Ltd — PAN India Operations
