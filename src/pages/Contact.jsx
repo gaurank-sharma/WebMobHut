@@ -1,19 +1,34 @@
 import { useState } from 'react';
-import { Phone, Mail, Globe, CheckCircle, AlertCircle } from 'lucide-react';
+import { Phone, Mail, Globe, CheckCircle, AlertCircle, MapPin as MapPinIcon } from 'lucide-react';
 
-function MapPin({ top, left, label, sub, primary = false }) {
+function MapPin({ top, left, label, primary = false, labelDir = 'right' }) {
+  const labelStyle = labelDir === 'left'
+    ? { right: '110%', left: 'auto', textAlign: 'right' }
+    : { left: '110%' };
   return (
-    <div className={`absolute group`} style={{ top, left }}>
-      <div className={`rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-125 ${
-        primary ? 'w-10 h-10 bg-[#2eaff0]/25 animate-pulse' : 'w-7 h-7 bg-white/10'
-      }`}>
-        <div className={`rounded-full ${
-          primary ? 'w-3.5 h-3.5 bg-[#2eaff0] shadow-[0_0_10px_#2eaff0]' : 'w-2 h-2 bg-white/70'
-        }`} />
-      </div>
-      <div className="absolute top-0 left-6 bg-neutral-900/95 border border-neutral-700 px-2.5 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
-        <p className={`font-bold text-xs ${primary ? 'text-[#2eaff0]' : 'text-white'}`}>{label}</p>
-        {sub && <p className="text-neutral-400 text-[10px]">{sub}</p>}
+    <div className="absolute" style={{ top, left, transform: 'translate(-50%, -50%)' }}>
+      {/* Outer glow ring for primary */}
+      {primary && (
+        <div className="absolute inset-0 rounded-full bg-[#2eaff0]/20 animate-ping scale-150" />
+      )}
+      {/* Dot */}
+      <div className={`relative rounded-full flex items-center justify-center ${
+        primary
+          ? 'w-4 h-4 bg-[#2eaff0] shadow-[0_0_14px_4px_rgba(46,175,240,0.5)]'
+          : 'w-2.5 h-2.5 bg-white/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.15)]'
+      }`} />
+      {/* Always-visible label */}
+      <div
+        className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none"
+        style={labelStyle}
+      >
+        <span className={`text-[9px] font-semibold leading-none px-1.5 py-0.5 rounded ${
+          primary
+            ? 'text-[#2eaff0] bg-black/80'
+            : 'text-white/70 bg-black/60'
+        }`}>
+          {label}
+        </span>
       </div>
     </div>
   );
@@ -102,7 +117,7 @@ const ContactUs = () => {
                   { icon: Phone, label: '+91-9910319121', href: 'tel:+919910319121' },
                   { icon: Mail, label: 'webmobhut@gmail.com', href: 'mailto:webmobhut@gmail.com' },
                   { icon: Globe, label: 'www.webmobhut.com', href: 'https://www.webmobhut.com' },
-                  { icon: MapPin, label: 'Delhi NCR & Bangalore', href: null },
+                  { icon: MapPinIcon, label: 'Delhi NCR & Bangalore', href: null },
                 ].map(({ icon: Icon, label, href }) => (
                   <div key={label} className="flex items-center gap-3">
                     <div className="w-9 h-9 bg-[#2eaff0]/10 rounded-lg flex items-center justify-center shrink-0">
@@ -119,11 +134,10 @@ const ContactUs = () => {
 
               {/* Office hours */}
               <div className="bg-[#0f0f0f] border border-neutral-800 rounded-2xl p-6">
-                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#2eaff0] mb-4">Office Hours</p>
-                <div className="space-y-2 text-sm text-gray-400">
-                  <div className="flex justify-between"><span>Monday – Friday</span><span className="text-white">9:00 AM – 6:00 PM</span></div>
-                  <div className="flex justify-between"><span>Saturday</span><span className="text-white">10:00 AM – 3:00 PM</span></div>
-                  <div className="flex justify-between"><span>Sunday</span><span className="text-gray-600">Closed</span></div>
+                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#2eaff0] mb-4">Working Hours</p>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-400">Always available</span>
+                  <span className="text-[#2eaff0] font-bold text-base">24 × 7</span>
                 </div>
               </div>
             </div>
@@ -280,17 +294,17 @@ const ContactUs = () => {
             {/* Delhi NCR — primary HQ */}
             <MapPin top="37%" left="39%" label="Delhi NCR" sub="Delhi · Noida · Gurgaon" primary />
             {/* Jaipur */}
-            <MapPin top="43%" left="33%" label="Jaipur" sub="Rajasthan" />
+            <MapPin top="43%" left="33%" label="Jaipur" labelDir="left" />
             {/* Lucknow */}
-            <MapPin top="42%" left="50%" label="Lucknow" sub="Uttar Pradesh" />
+            <MapPin top="42%" left="50%" label="Lucknow" />
             {/* Chandigarh */}
-            <MapPin top="30%" left="37%" label="Chandigarh" sub="Punjab" />
+            <MapPin top="30%" left="37%" label="Chandigarh" labelDir="left" />
             {/* Ahmedabad */}
-            <MapPin top="53%" left="27%" label="Ahmedabad" sub="Gujarat" />
+            <MapPin top="53%" left="27%" label="Ahmedabad" labelDir="left" />
             {/* Mumbai */}
-            <MapPin top="61%" left="27%" label="Mumbai" sub="Maharashtra" />
+            <MapPin top="61%" left="27%" label="Mumbai" labelDir="left" />
             {/* Pune */}
-            <MapPin top="65%" left="30%" label="Pune" sub="Maharashtra" />
+            <MapPin top="65%" left="30%" label="Pune" labelDir="left" />
             {/* Hyderabad */}
             <MapPin top="67%" left="43%" label="Hyderabad" sub="Telangana" />
             {/* Kolkata */}
@@ -300,7 +314,7 @@ const ContactUs = () => {
             {/* Chennai */}
             <MapPin top="77%" left="47%" label="Chennai" sub="Tamil Nadu" />
             {/* Surat */}
-            <MapPin top="56%" left="26%" label="Surat" sub="Gujarat" />
+            <MapPin top="56%" left="26%" label="Surat" labelDir="left" />
 
             <div className="absolute bottom-3 left-4 text-[10px] text-neutral-600">
               © WebMobHut Pvt Ltd — PAN India Operations

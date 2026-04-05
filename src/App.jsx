@@ -61,8 +61,6 @@ import Contact from './pages/Contact';
 import Careers from './pages/Careers';
 import Clients from './pages/Clients';
 import Privacy from './pages/Privacy';
-import CSRPolicy from './pages/CSRPolicy';
-import Awards from './pages/Awards';
 
 // Admin Imports
 import { AdminAuthProvider } from './context/AdminAuthContext';
@@ -92,8 +90,6 @@ function PublicSite() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/csr" element={<CSRPolicy />} />
-            <Route path="/awards" element={<Awards />} />
           </Routes>
         </main>
         <Footer />

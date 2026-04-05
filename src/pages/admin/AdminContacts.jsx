@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
-import { Search, Trash2, Eye, X, CheckCircle, Mail, Phone, Building2 } from 'lucide-react';
+import { Search, Trash2, Eye, X, Mail, Phone, Building2, FileText } from 'lucide-react';
 
 const STATUS_OPTS = ['all', 'new', 'read', 'replied', 'resolved', 'spam'];
 const statusColor = {
@@ -185,6 +185,19 @@ export default function AdminContacts() {
                 <p className="text-gray-500 text-xs mb-1">Message</p>
                 <p className="text-gray-300 text-sm leading-relaxed bg-[#1a1a1a] rounded-lg p-3">{selected.message}</p>
               </div>
+              {selected.cvUrl && (
+                <div>
+                  <p className="text-gray-500 text-xs mb-2">CV / Resume</p>
+                  <a
+                    href={selected.cvUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#2eaff0]/10 border border-[#2eaff0]/20 text-[#2eaff0] text-xs font-medium rounded-lg hover:bg-[#2eaff0]/20 transition-colors"
+                  >
+                    <FileText size={13} /> Download CV
+                  </a>
+                </div>
+              )}
               {/* Status Actions */}
               <div>
                 <p className="text-gray-500 text-xs mb-2">Update Status</p>

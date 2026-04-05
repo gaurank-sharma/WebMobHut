@@ -87,7 +87,6 @@ const Footer = () => {
                 <li><Link to="/gallery" className="hover:text-white transition-colors">Work</Link></li>
                 <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
                 <li><Link to="/clients" className="hover:text-white transition-colors">Our Clients</Link></li>
-                <li><Link to="/awards" className="hover:text-white transition-colors">Awards</Link></li>
               </ul>
             </div>
 
@@ -96,7 +95,6 @@ const Footer = () => {
               <h4 className="text-[#2eaff0] font-semibold tracking-wide mb-6">Legal</h4>
               <ul className="space-y-4 text-neutral-300 text-sm font-light">
                 <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
-                <li><Link to="/csr" className="hover:text-white transition-colors">CSR Policy</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Raise a concern</Link></li>
               </ul>
             </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ExternalLink, Award, Handshake, Target } from 'lucide-react';
+import { Award, Handshake, Target } from 'lucide-react';
 
 const API = 'https://web-mob-hut-backend.vercel.app/api';
 
@@ -8,6 +8,37 @@ const WHY = [
   { icon: Award, title: 'Proven Excellence', desc: '500+ events executed across India with meticulous attention to detail.' },
   { icon: Handshake, title: 'Long-term Partnership', desc: 'We build relationships, not just events. Most clients return for every activation.' },
 ];
+
+/* Infinite marquee — duplicates the list for seamless loop */
+function Marquee({ clients, speed = 35, reverse = false }) {
+  const items = [...clients, ...clients];
+  return (
+    <div className="overflow-hidden w-full">
+      <style>{`
+        @keyframes marquee-fwd { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        .marquee-fwd { animation: marquee-fwd ${speed}s linear infinite; }
+        .marquee-rev { animation: marquee-rev ${speed}s linear infinite; }
+      `}</style>
+      <div className={`flex gap-6 w-max ${reverse ? 'marquee-rev' : 'marquee-fwd'}`}>
+        {items.map((client, i) => (
+          <div
+            key={`${client._id}-${i}`}
+            className="flex items-center justify-center bg-[#0d0d0d] border border-neutral-800 rounded-2xl px-8 py-5 hover:border-[#2eaff0]/30 transition-colors shrink-0"
+            style={{ minWidth: 160, height: 90 }}
+          >
+            <img
+              src={client.logo}
+              alt={client.name}
+              className="max-h-12 max-w-[130px] object-contain filter brightness-75 hover:brightness-110 transition-all duration-300"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Clients() {
   const [clients, setClients] = useState([]);
@@ -20,8 +51,10 @@ export default function Clients() {
       .finally(() => setLoading(false));
   }, []);
 
-  const featured = clients.filter((c) => c.isFeatured);
-  const rest = clients.filter((c) => !c.isFeatured);
+  // Split into two rows for double-marquee effect
+  const mid = Math.ceil(clients.length / 2);
+  const row1 = clients.slice(0, mid);
+  const row2 = clients.slice(mid);
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
@@ -44,63 +77,31 @@ export default function Clients() {
         </div>
       </section>
 
-      {/* ── FEATURED CLIENTS ── */}
-      {(loading || featured.length > 0) && (
-        <section className="px-6 pb-20">
-          <div className="container mx-auto max-w-5xl">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="h-px flex-1 bg-neutral-900" />
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#2eaff0] px-4">Featured Partners</span>
-              <div className="h-px flex-1 bg-neutral-900" />
-            </div>
-
-            {loading ? (
-              <div className="flex justify-center py-16">
-                <div className="w-8 h-8 border-2 border-[#2eaff0] border-t-transparent rounded-full animate-spin" />
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {featured.map((client) => (
-                  <ClientCard key={client._id} client={client} featured />
-                ))}
-              </div>
-            )}
+      {/* ── LOGO MARQUEE ── */}
+      <section className="pb-24 px-0 overflow-hidden">
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-[#2eaff0] border-t-transparent rounded-full animate-spin" />
           </div>
-        </section>
-      )}
-
-      {/* ── ALL CLIENTS ── */}
-      {!loading && rest.length > 0 && (
-        <section className="px-6 pb-20">
-          <div className="container mx-auto max-w-5xl">
-            {featured.length > 0 && (
-              <div className="flex items-center gap-3 mb-8">
-                <div className="h-px flex-1 bg-neutral-900" />
-                <span className="text-xs font-bold tracking-[0.3em] uppercase text-gray-600 px-4">Our Clients</span>
-                <div className="h-px flex-1 bg-neutral-900" />
-              </div>
-            )}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {rest.map((client) => (
-                <ClientCard key={client._id} client={client} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Empty state */}
-      {!loading && clients.length === 0 && (
-        <section className="px-6 pb-20">
-          <div className="container mx-auto max-w-5xl">
+        ) : clients.length === 0 ? (
+          <div className="container mx-auto max-w-5xl px-6">
             <div className="text-center py-20 bg-neutral-950 border border-neutral-800 rounded-2xl">
               <Handshake size={36} className="mx-auto text-neutral-700 mb-3" />
               <p className="text-gray-400 font-medium">Client logos coming soon.</p>
               <p className="text-gray-600 text-sm mt-1">Check back or contact us to partner with WebMobHut.</p>
             </div>
           </div>
-        </section>
-      )}
+        ) : (
+          <div className="space-y-6">
+            {/* Row 1 — forward */}
+            {row1.length >= 2 && <Marquee clients={row1} speed={30} />}
+            {/* Row 2 — reverse, slightly slower */}
+            {row2.length >= 2 && <Marquee clients={row2} speed={38} reverse />}
+            {/* If too few clients for two rows, show single row */}
+            {clients.length < 4 && <Marquee clients={clients} speed={25} />}
+          </div>
+        )}
+      </section>
 
       {/* ── WHY CHOOSE US ── */}
       <section className="bg-neutral-950 border-t border-neutral-800 py-24 px-6">
@@ -140,38 +141,6 @@ export default function Clients() {
           </a>
         </div>
       </section>
-    </div>
-  );
-}
-
-function ClientCard({ client, featured = false }) {
-  return (
-    <div
-      className={`group bg-[#0a0a0a] border rounded-2xl flex flex-col items-center justify-center p-5 hover:border-[#2eaff0]/30 transition-all duration-300 hover:-translate-y-1
-        ${featured ? 'border-[#2eaff0]/10 aspect-video' : 'border-neutral-800 aspect-square'}`}
-    >
-      <img
-        src={client.logo}
-        alt={client.name}
-        className="max-h-16 max-w-full object-contain filter brightness-75 group-hover:brightness-100 transition-all duration-300"
-        loading="lazy"
-      />
-      {featured && (
-        <div className="mt-3 text-center opacity-0 group-hover:opacity-100 transition-opacity">
-          <p className="text-white text-xs font-semibold">{client.name}</p>
-          {client.industry && <p className="text-gray-500 text-[10px] mt-0.5">{client.industry}</p>}
-          {client.website && (
-            <a
-              href={client.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[#2eaff0] text-[10px] mt-1 hover:underline"
-            >
-              <ExternalLink size={9} /> Visit
-            </a>
-          )}
-        </div>
-      )}
     </div>
   );
 }

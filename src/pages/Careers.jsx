@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapPin, Briefcase, Clock, ChevronRight, Search } from 'lucide-react';
+import { MapPin, Briefcase, Clock, ChevronRight, Search, X, Upload, CheckCircle, AlertCircle } from 'lucide-react';
 
 const API = 'https://web-mob-hut-backend.vercel.app/api';
 
@@ -13,12 +13,55 @@ const TYPE_COLORS = {
 
 const FILTERS = ['All', 'full-time', 'part-time', 'contract', 'internship', 'freelance'];
 
+const EMPTY_APPLY = { name: '', email: '', phone: '', message: '' };
+
 export default function Careers() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
   const [expanded, setExpanded] = useState(null);
+
+  // Apply modal state
+  const [applyJob, setApplyJob] = useState(null);
+  const [applyForm, setApplyForm] = useState(EMPTY_APPLY);
+  const [cvFile, setCvFile] = useState(null);
+  const [applyStatus, setApplyStatus] = useState(null); // null | 'loading' | 'success' | 'error'
+  const [applyError, setApplyError] = useState('');
+
+  const openApply = (job) => {
+    setApplyJob(job);
+    setApplyForm(EMPTY_APPLY);
+    setCvFile(null);
+    setApplyStatus(null);
+    setApplyError('');
+  };
+
+  const closeApply = () => { setApplyJob(null); setApplyStatus(null); };
+
+  const handleApplySubmit = async (e) => {
+    e.preventDefault();
+    if (!cvFile) { setApplyError('Please upload your CV (PDF or DOC).'); return; }
+    setApplyStatus('loading');
+    setApplyError('');
+    try {
+      const fd = new FormData();
+      fd.append('name', applyForm.name);
+      fd.append('email', applyForm.email);
+      fd.append('phone', applyForm.phone);
+      fd.append('message', applyForm.message || `Applied for: ${applyJob.title}`);
+      fd.append('jobTitle', applyJob.title);
+      fd.append('jobId', applyJob._id);
+      fd.append('cv', cvFile);
+      const res = await fetch(`${API}/apply`, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || 'Submission failed');
+      setApplyStatus('success');
+    } catch (err) {
+      setApplyStatus('error');
+      setApplyError(err.message);
+    }
+  };
 
   useEffect(() => {
     fetch(`${API}/careers?isActive=true`)
@@ -225,12 +268,12 @@ export default function Careers() {
                       </div>
 
                       <div className="flex flex-wrap items-center gap-3 pt-2">
-                        <a
-                          href="/contact"
+                        <button
+                          onClick={() => openApply(job)}
                           className="px-7 py-3 bg-[#2eaff0] text-black font-bold tracking-widest text-xs uppercase rounded-full hover:bg-white transition-colors duration-300 shadow-[0_0_15px_rgba(46,175,240,0.2)]"
                         >
                           Apply Now
-                        </a>
+                        </button>
                         <span className="text-gray-500 text-xs">
                           or email your CV to{' '}
                           <span className="text-[#2eaff0] select-all">
@@ -246,6 +289,122 @@ export default function Careers() {
           )}
         </div>
       </section>
+
+      {/* ── APPLY MODAL ── */}
+      {applyJob && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={closeApply}>
+          <div className="bg-[#0f0f0f] border border-neutral-800 rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="flex items-start justify-between px-6 py-5 border-b border-neutral-800">
+              <div>
+                <p className="text-xs text-[#2eaff0] font-bold tracking-widest uppercase mb-1">Apply for</p>
+                <h3 className="text-white font-bold text-lg leading-tight">{applyJob.title}</h3>
+              </div>
+              <button onClick={closeApply} className="text-gray-500 hover:text-white mt-1 shrink-0"><X size={18} /></button>
+            </div>
+
+            {applyStatus === 'success' ? (
+              <div className="flex flex-col items-center py-14 px-6 text-center">
+                <div className="w-16 h-16 bg-green-500/10 border border-green-500/20 rounded-full flex items-center justify-center mb-4">
+                  <CheckCircle size={30} className="text-green-400" />
+                </div>
+                <h4 className="text-white font-bold text-lg mb-2">Application Submitted!</h4>
+                <p className="text-gray-400 text-sm">We'll review your application and get back to you soon.</p>
+                <button onClick={closeApply} className="mt-6 px-6 py-2.5 border border-neutral-700 text-gray-300 text-sm rounded-full hover:border-[#2eaff0] hover:text-[#2eaff0] transition-colors">Close</button>
+              </div>
+            ) : (
+              <form onSubmit={handleApplySubmit} className="p-6 space-y-4">
+                {applyStatus === 'error' && (
+                  <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-400 text-xs px-4 py-3 rounded-lg">
+                    <AlertCircle size={14} /> {applyError || 'Something went wrong. Please try again.'}
+                  </div>
+                )}
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="col-span-2">
+                    <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider font-semibold">Full Name *</label>
+                    <input
+                      required type="text" placeholder="Your full name"
+                      value={applyForm.name} onChange={(e) => setApplyForm({ ...applyForm, name: e.target.value })}
+                      className="w-full bg-[#1a1a1a] border border-neutral-700 text-white placeholder-neutral-600 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#2eaff0] transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider font-semibold">Email *</label>
+                    <input
+                      required type="email" placeholder="you@email.com"
+                      value={applyForm.email} onChange={(e) => setApplyForm({ ...applyForm, email: e.target.value })}
+                      className="w-full bg-[#1a1a1a] border border-neutral-700 text-white placeholder-neutral-600 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#2eaff0] transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider font-semibold">Phone</label>
+                    <input
+                      type="tel" placeholder="+91 00000 00000"
+                      value={applyForm.phone} onChange={(e) => setApplyForm({ ...applyForm, phone: e.target.value })}
+                      className="w-full bg-[#1a1a1a] border border-neutral-700 text-white placeholder-neutral-600 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#2eaff0] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* CV Upload */}
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider font-semibold">Upload CV *</label>
+                  <label className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-5 cursor-pointer transition-colors ${cvFile ? 'border-[#2eaff0]/40 bg-[#2eaff0]/5' : 'border-neutral-700 hover:border-[#2eaff0]/40'}`}>
+                    {cvFile ? (
+                      <div className="text-center">
+                        <CheckCircle size={22} className="text-[#2eaff0] mx-auto mb-1.5" />
+                        <p className="text-[#2eaff0] text-xs font-semibold truncate max-w-[200px]">{cvFile.name}</p>
+                        <p className="text-gray-500 text-[10px] mt-0.5">{(cvFile.size / 1024 / 1024).toFixed(1)} MB</p>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <Upload size={22} className="text-gray-500 mx-auto mb-1.5" />
+                        <p className="text-gray-400 text-xs font-medium">Click to upload your CV</p>
+                        <p className="text-gray-600 text-[10px] mt-0.5">PDF, DOC, DOCX — max 5 MB</p>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      className="hidden"
+                      onChange={(e) => { const f = e.target.files[0]; if (f) setCvFile(f); }}
+                    />
+                  </label>
+                  {cvFile && (
+                    <button type="button" onClick={() => setCvFile(null)} className="text-xs text-gray-500 hover:text-gray-300 mt-1">
+                      Remove file
+                    </button>
+                  )}
+                </div>
+
+                {/* Optional cover note */}
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider font-semibold">Cover Note <span className="normal-case font-normal text-gray-600">(optional)</span></label>
+                  <textarea
+                    rows={3} placeholder="Tell us briefly why you're a great fit..."
+                    value={applyForm.message} onChange={(e) => setApplyForm({ ...applyForm, message: e.target.value })}
+                    className="w-full bg-[#1a1a1a] border border-neutral-700 text-white placeholder-neutral-600 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#2eaff0] transition-colors resize-none"
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-1">
+                  <button type="button" onClick={closeApply} className="flex-1 py-3 border border-neutral-700 text-gray-400 rounded-full text-sm hover:border-neutral-600 transition-colors">Cancel</button>
+                  <button
+                    type="submit"
+                    disabled={applyStatus === 'loading'}
+                    className="flex-1 py-3 bg-[#2eaff0] text-black font-bold text-sm rounded-full hover:bg-white transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                  >
+                    {applyStatus === 'loading'
+                      ? <><div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" /> Submitting...</>
+                      : 'Submit Application'}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── CTA ── */}
       <section className="bg-neutral-950 border-t border-neutral-800 py-20 px-6">
