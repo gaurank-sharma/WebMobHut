@@ -51,7 +51,8 @@ export default function Clients() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Split into two rows for double-marquee effect
+  // Need at least 4 clients for a proper marquee (duplicated = 8 items visually)
+  const useMarquee = clients.length >= 4;
   const mid = Math.ceil(clients.length / 2);
   const row1 = clients.slice(0, mid);
   const row2 = clients.slice(mid);
@@ -77,8 +78,8 @@ export default function Clients() {
         </div>
       </section>
 
-      {/* ── LOGO MARQUEE ── */}
-      <section className="pb-24 px-0 overflow-hidden">
+      {/* ── LOGO SECTION ── */}
+      <section className="pb-24 overflow-hidden">
         {loading ? (
           <div className="flex justify-center py-20">
             <div className="w-8 h-8 border-2 border-[#2eaff0] border-t-transparent rounded-full animate-spin" />
@@ -91,14 +92,30 @@ export default function Clients() {
               <p className="text-gray-600 text-sm mt-1">Check back or contact us to partner with WebMobHut.</p>
             </div>
           </div>
-        ) : (
+        ) : useMarquee ? (
           <div className="space-y-6">
-            {/* Row 1 — forward */}
-            {row1.length >= 2 && <Marquee clients={row1} speed={30} />}
-            {/* Row 2 — reverse, slightly slower */}
-            {row2.length >= 2 && <Marquee clients={row2} speed={38} reverse />}
-            {/* If too few clients for two rows, show single row */}
-            {clients.length < 4 && <Marquee clients={clients} speed={25} />}
+            <Marquee clients={row1} speed={30} />
+            {row2.length > 0 && <Marquee clients={row2} speed={38} reverse />}
+          </div>
+        ) : (
+          /* Few logos — centered static grid, no duplication */
+          <div className="container mx-auto max-w-5xl px-6">
+            <div className="flex flex-wrap justify-center gap-6">
+              {clients.map((client) => (
+                <div
+                  key={client._id}
+                  className="flex items-center justify-center bg-[#0d0d0d] border border-neutral-800 rounded-2xl px-10 py-6 hover:border-[#2eaff0]/30 transition-colors"
+                  style={{ minWidth: 180, height: 100 }}
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-14 max-w-[150px] object-contain filter brightness-75 hover:brightness-110 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </section>
