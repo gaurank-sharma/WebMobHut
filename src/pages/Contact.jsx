@@ -109,7 +109,7 @@ const ContactUs = () => {
               {/* Contact card */}
               <div className="bg-[#0f0f0f] border border-neutral-800 rounded-2xl p-6 space-y-5">
                 <div>
-                  <p className="font-bold text-lg text-white">Bhawna</p>
+                  <p className="font-bold text-lg text-white">Viraj Ratra</p>
                   <p className="text-[#2eaff0] text-sm font-medium">Director, WebMobHut Pvt Ltd</p>
                 </div>
                 <div className="h-px bg-neutral-800" />
