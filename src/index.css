@@ -1,54 +1,63 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
-
-@import "tailwindcss";
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Outfit', sans-serif;
-  background-color: #f8f9fa;
-  color: #1a1a1a;
-  overflow-x: hidden;
-}
-
-.font-heading {
-  font-family: 'Playfair Display', serif;
-}
-
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-::-webkit-scrollbar-thumb {
-  background: #31A9E9; 
-  border-radius: 4px;
-} */
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
 @import "tailwindcss";
 
+/* =============================================
+   TAILWIND V4: CLASS-BASED DARK MODE
+   Applies dark: utilities when .dark is on html
+============================================= */
+@variant dark (&:where(.dark, .dark *));
+
+/* =============================================
+   CSS CUSTOM PROPERTIES — THEME TOKENS
+============================================= */
+:root {
+  /* Light mode (default) */
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #f8f9fa;
+  --bg-tertiary:   #f1f5f9;
+  --bg-card:       #ffffff;
+  --bg-input:      #f1f5f9;
+  --text-primary:  #111827;
+  --text-secondary:#6b7280;
+  --text-muted:    #9ca3af;
+  --border:        #e5e7eb;
+  --border-subtle: #f3f4f6;
+  --accent:        #2eaff0;
+  --scrollbar-track:   #f1f1f1;
+  --scrollbar-thumb:   #2eaff0;
+}
+
+html.dark {
+  /* Dark mode overrides */
+  --bg-primary:    #000000;
+  --bg-secondary:  #050505;
+  --bg-tertiary:   #0a0a0a;
+  --bg-card:       #0d0d0d;
+  --bg-input:      #1a1a1a;
+  --text-primary:  #ffffff;
+  --text-secondary:#9ca3af;
+  --text-muted:    #6b7280;
+  --border:        #262626;
+  --border-subtle: #171717;
+  --accent:        #2eaff0;
+  --scrollbar-track:   #0a0a0a;
+  --scrollbar-thumb:   #2eaff0;
+}
+
+/* =============================================
+   BASE STYLES
+============================================= */
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Outfit', sans-serif;
-  /* Updated to match your cinematic dark theme */
-  background-color: #000000; 
-  color: #ffffff;
-  
-  /* REMOVED overflow-x: hidden; from here! It breaks fixed navbars. */
-  /* If you need to hide horizontal scrolling, we do it on a wrapper div in App.jsx, never on the body. */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Ensure React Root takes full width/height without Vite's default padding/centering */
 #root {
   width: 100%;
   min-height: 100vh;
@@ -61,17 +70,19 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
-/* Custom Scrollbar */
+/* =============================================
+   CUSTOM SCROLLBAR
+============================================= */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a; 
+  background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2eaff0; 
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffffff; 
+  background: var(--accent);
 }

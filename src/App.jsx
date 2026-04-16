@@ -47,6 +47,7 @@
 
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -61,6 +62,7 @@ import Contact from './pages/Contact';
 import Careers from './pages/Careers';
 import Clients from './pages/Clients';
 import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 // Admin Imports
 import { AdminAuthProvider } from './context/AdminAuthContext';
@@ -78,7 +80,7 @@ function PublicSite() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col min-h-screen bg-black text-white font-sans">
+      <div className="flex flex-col min-h-screen font-sans" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -90,6 +92,7 @@ function PublicSite() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
           </Routes>
         </main>
         <Footer />
@@ -135,12 +138,14 @@ function AppRoutes() {
 
 function App() {
   return (
-    <AdminAuthProvider>
-      <Router>
-        <ScrollToTop />
-        <AppRoutes />
-      </Router>
-    </AdminAuthProvider>
+    <ThemeProvider>
+      <AdminAuthProvider>
+        <Router>
+          <ScrollToTop />
+          <AppRoutes />
+        </Router>
+      </AdminAuthProvider>
+    </ThemeProvider>
   );
 }
 

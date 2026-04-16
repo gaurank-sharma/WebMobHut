@@ -1,16 +1,21 @@
 export default function Privacy() {
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="min-h-screen font-sans
+      bg-white text-gray-900
+      dark:bg-black dark:text-white">
       <section className="pt-36 pb-24 px-6">
         <div className="container mx-auto max-w-3xl">
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#2eaff0] mb-4 block">Legal</span>
           <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-wide mb-10">Privacy Policy</h1>
-          <div className="h-px bg-neutral-800 mb-10" />
+          <div className="h-px mb-10 bg-gray-200 dark:bg-neutral-800" />
 
-          <div className="space-y-8 text-gray-400 text-sm leading-relaxed">
+          <div className="space-y-8 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             <div>
-              <p className="text-xs text-gray-600 mb-6">Last updated: January 2024</p>
-              <p>WebMobHut Pvt Ltd ("we", "us", or "our") is committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website <strong className="text-white">www.webmobhut.com</strong>.</p>
+              <p className="text-xs mb-6 text-gray-400 dark:text-gray-600">Last updated: January 2024</p>
+              <p>
+                WebMobHut Pvt Ltd ("we", "us", or "our") is committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website{' '}
+                <strong className="text-gray-900 dark:text-white">www.webmobhut.com</strong>.
+              </p>
             </div>
 
             {[
@@ -48,7 +53,7 @@ export default function Privacy() {
               },
             ].map(({ title, content }) => (
               <div key={title}>
-                <h2 className="text-white font-semibold text-base mb-2">{title}</h2>
+                <h2 className="font-semibold text-base mb-2 text-gray-900 dark:text-white">{title}</h2>
                 <p>{content}</p>
               </div>
             ))}
